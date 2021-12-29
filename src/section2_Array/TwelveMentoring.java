@@ -1,4 +1,4 @@
-package section_2Array;
+package section2_Array;
 
 import java.util.Scanner;
 
@@ -12,13 +12,14 @@ public class TwelveMentoring {
 
         int[][] arr = new int[m][n];
 
-        for(int i=0; i<m; i++){
-            for(int j=0; j<n; j++){
-                arr[i][j]=scanner.nextInt();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = scanner.nextInt();
             }
         }
 
         int answer = 0;
+
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
                 int cnt = 0;
@@ -31,11 +32,10 @@ public class TwelveMentoring {
                     }
                     if (pi < pj) cnt++;
                 }
-                if (cnt == m) {
-                    answer++;
-                }
+                if (cnt == m) answer++;
             }
         }
+
         System.out.println(answer);
     }
 }

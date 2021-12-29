@@ -1,4 +1,4 @@
-package section_2Array;
+package section2_Array;
 
 import java.util.Scanner;
 
@@ -7,11 +7,10 @@ public class ElevenTemporaryClassChairMan {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int max = 0;
-        int answer = 0;
-
         int n = scanner.nextInt();
         int[][] arr = new int[n+1][6];
+        int max = Integer.MIN_VALUE;
+        int answer = 0;
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= 5; j++) {
@@ -29,14 +28,11 @@ public class ElevenTemporaryClassChairMan {
                     }
                 }
             }
-
-            if (max < cnt) {
+            if (cnt > max) {
                 max = cnt;
                 answer = i;
             }
-
         }
-
         System.out.println(answer);
     }
 }

@@ -1,4 +1,4 @@
-package section_2Array;
+package section2_Array;
 
 import java.util.Scanner;
 

@@ -1,6 +1,5 @@
-package section_2Array;
+package section2_Array;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class NineGrating {
