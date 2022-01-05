@@ -22,6 +22,7 @@ public class SixRescuePrincess {
             queue.poll();
             if (queue.size() == 1) answer = queue.poll();
         }
+        //
         return answer;
     }
 
