@@ -2,7 +2,7 @@ package section7_recursive_tree_graph;
 
 public class FiveDFS {
 
-    static class Node {
+    private static class Node {
         Node l;
         Node r;
         int data;
