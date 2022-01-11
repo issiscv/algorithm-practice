@@ -5,43 +5,47 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class EightFindCalf {
-    static int L = 0;
     static int[] arr = {-1, 1, 5};
-    static int[] ch;
+    static int n, m;
+    static int[] ch = new int[100001];
+    static int L = 0;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        ch = new int[10001];
+        n = scanner.nextInt();
+        m = scanner.nextInt();
 
-        BFS(n, m);
-        System.out.println(L);
+        int sol = BFS(n, m);
+        System.out.println(sol);
     }
 
-    private static void BFS(int s, int e) {
+    private static int BFS(int s, int e) {
+
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(s);
 
         while (!queue.isEmpty()) {
-            int size = queue.size();//1
+            int size = queue.size();
 
             for (int i = 0; i < size; i++) {
                 int tmp = queue.poll();
-                for (int j = 0; j < 3; j++) {
-                    int nx = tmp + arr[j];
-                    if (nx == e) {
-                        L++;
-                        return;
-                    } else {
-                        if(nx>=1 && nx<=10000 && ch[nx]==0){
-                            ch[nx]=1;
-                            queue.offer(nx);
+
+                if (tmp == e) {
+                    return L++;
+                } else {
+                    for (int j = 0; j < 3; j++) {
+                        int dx = tmp + arr[j];
+                        if (ch[dx] == 0 && dx > 0 && dx < 10001) {
+                            queue.offer(dx);
+                            ch[dx] = 1;
                         }
                     }
                 }
             }
+
             L++;
         }
+        return 0;
     }
 }

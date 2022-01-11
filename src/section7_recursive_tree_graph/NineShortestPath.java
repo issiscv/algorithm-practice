@@ -33,9 +33,7 @@ public class NineShortestPath {
     }
 
     private static int DFS(int i, Node root) {
-        if (root.lt == null && root.rt == null) {
-            return i;
-        }
+        if (root. lt == null && root.rt == null) return i;
         return Math.min(DFS(i+1, root.lt), DFS(i+1, root.rt));
     }
 
