@@ -1,5 +1,7 @@
 package section8_dfs_bfs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ThreeMaxScore {
@@ -14,38 +16,39 @@ public class ThreeMaxScore {
         }
     }
 
-    static int n, time;
-    static int score = 0;
+    static int n,m ;
+    static List<Problem> list = new ArrayList<>();
+    static int max = Integer.MIN_VALUE;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        n = scanner.nextInt();
-        time = scanner.nextInt();
 
-        Problem[] problems = new Problem[n];
+        n = scanner.nextInt();
+        m = scanner.nextInt();
 
         for (int i = 0; i < n; i++) {
-            int a = scanner.nextInt();//점수
-            int b = scanner.nextInt();//시간
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
 
             Problem problem = new Problem(a, b);
-            problems[i] = problem;
+
+            list.add(problem);
         }
 
-        solution(0, 0, 0, problems);
-        System.out.println(score);
+        DFS(0, 0, 0);
+
+        System.out.println(max);
     }
 
-    private static void solution(int s, int t, int l, Problem[] problems) {
-
-        if (t > time) return;
-        if (l == n) {
-            score = Math.max(score, s);
+    private static void DFS(int v, int score, int time) {
+        if (time > m) return;
+        if (v == n) {
+            if (time <= m) {
+                max = Math.max(max, score);
+            }
+        } else {
+            DFS(v+1,score + list.get(v).score, time + list.get(v).time);
+            DFS(v+1,score, time);
         }
-        else {
-            solution(s + problems[l].score, t + problems[l].time, l+1, problems);
-            solution(s, t, l+1, problems);
-        }
-
     }
 }

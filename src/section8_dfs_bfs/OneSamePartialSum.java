@@ -4,40 +4,39 @@ import java.util.Scanner;
 
 public class OneSamePartialSum {
 
-    public static int n;
-    public static String answer = "NO";
-    public static boolean flag = false;
-    public static int total = 0;
-    public static int[] arr;
+    static int[] arr;
+    static int n;
+    static int total = 0;
+    static boolean flag = false;
+
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         n = scanner.nextInt();
         arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = scanner.nextInt();
             total += arr[i];
         }
 
-        solution(0, 0, arr);
+        DFS(0, 0);
 
-        System.out.println(answer);
-
+        if (flag) System.out.println("YES");
+        else System.out.println("NO");
     }
 
-    private static void solution(int s, int sum, int[] arr) {
-        if (flag) return;
+    private static void DFS(int v, int sum) {
+
+        if (v == n) return;
         if (total / 2 < sum) return;
-        if (s == n) {
-            if (total - sum == sum) {
-                answer = "YES";
-                flag = true;
-                return;
-            }
+        if (total - sum == sum) {
+            flag = true;
         } else {
-            solution(s+1, sum, arr);
-            solution(s+1, sum + arr[s], arr);
+            DFS(v + 1, sum + arr[v]);
+            DFS(v + 1, sum);
         }
-    }
 
+    }
 }
