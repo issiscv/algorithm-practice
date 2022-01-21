@@ -6,25 +6,26 @@ import java.util.Queue;
 public class Truck {
 
     public static int solution(int bridge_length, int weight, int[] truck_weights) {
+        int answer = 0;
         Queue<Integer> queue = new LinkedList<>();
-        int sum = 0;
         int time = 0;
-
+        int sum = 0;
         for (int i = 0; i < truck_weights.length; i++) {
-            int tmp = truck_weights[i];
 
             while (true) {
+
+                int truck = truck_weights[i];
                 if (queue.isEmpty()) {
-                    queue.offer(tmp);
-                    sum += tmp;
+                    queue.offer(truck);
                     time++;
+                    sum += truck;
                     break;
-                } else if (queue.size() == bridge_length){
+                } else if (queue.size() == bridge_length) {
                     sum -= queue.poll();
                 } else {
-                    if (sum + tmp <= weight) {
-                        queue.offer(tmp);
-                        sum += tmp;
+                    if (truck + sum <= weight) {
+                        queue.offer(truck);
+                        sum+= truck;
                         time++;
                         break;
                     } else {
@@ -33,10 +34,9 @@ public class Truck {
                     }
                 }
             }
-
         }
-
-        return time + bridge_length;
+        System.out.println(time + bridge_length);
+        return answer;
     }
 
     public static void main(String[] args) {

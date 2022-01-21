@@ -1,29 +1,27 @@
 package programmers.stack_queue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 public class Four {
 
-    public static List<Integer> solution(int[] prices) {
-        List<Integer> list = new ArrayList<>();
+    public static int[] solution(int[] prices) {
+        int[] answer = new int[prices.length];
+        Stack<Integer> stack = new Stack<>();
+
         for (int i = 0; i < prices.length; i++) {
-            int tmp = prices[i];
-            int count = 0;
-            for (int j = i + 1; j < prices.length; j++) {
-                if (prices[j] > tmp) {
-                    count++;
-                } else {
-                    break;
-                }
+
+            while (!stack.isEmpty() && prices[i] < prices[stack.peek()]) {
+                answer[stack.peek()] = i - stack.peek();
+                stack.pop();
             }
-            list.add(count);
-        }
-        for (Integer a : list) {
-            System.out.println(a);
+
+            stack.add(i);
         }
 
-        return list;
+        while (!stack.isEmpty()) {
+            answer[stack.peek()] = prices.length - stack.pop() - 1;
+        }
+        return answer;
     }
 
     public static void main(String[] args) {
