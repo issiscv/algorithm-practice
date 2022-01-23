@@ -1,26 +1,31 @@
 package programmers.heap;
 
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Spicy {
 
-    public static int solution(int[] scoville, int K) {
-        PriorityQueue<Integer> q = new PriorityQueue<>();
+    public static int solution(int[] scoville, int k) {
+        int answer = 0;
 
-        for(int i = 0; i < scoville.length; i++)
-            q.add(scoville[i]);
-
+        Queue<Integer> queue = new PriorityQueue<>();
         int count = 0;
-        while(q.size() > 1 && q.peek() < K){
-            int weakHot = q.poll();
-            int secondWeakHot = q.poll();
 
-            int mixHot = weakHot + (secondWeakHot * 2);
-            q.add(mixHot);
+        for (Integer s : scoville) {
+            queue.offer(s);
+        }
+
+        while (queue.size() > 1 && queue.peek() <= k) {
+            int a = queue.poll();
+            int b = queue.poll();
+
+            int c = a + (b * 2);
+            queue.offer(c);
+
             count++;
         }
 
-        if(q.size() <= 1 && q.peek() < K)
+        if (queue.size() <= 1 && queue.peek() < k)
             count = -1;
 
         return count;

@@ -13,27 +13,29 @@ public class Disk {
         Queue<int[]> queue = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
 
         int count = 0;
-        int i = 0;
+        int idx = 0;
         int now = 0;
+
         while (count < jobs.length) {
 
-            while (i < jobs.length && jobs[i][0] <= now) {
-                queue.offer(jobs[i++]);
+            while (idx < jobs.length && jobs[idx][0] <= now) {
+                queue.offer(jobs[idx++]);
             }
 
             if (queue.isEmpty()) {
-                now = jobs[i][0];
+                now = jobs[idx][0];
             } else {
                 int[] tmp = queue.poll();
                 answer += tmp[1] + now - tmp[0];
                 now += tmp[1];
                 count++;
             }
+
         }
 
         return answer / jobs.length;
     }
-
+    
     public static void main(String[] args) {
         int[][] jobs = {
             {0, 3},
