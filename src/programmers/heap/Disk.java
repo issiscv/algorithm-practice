@@ -1,6 +1,7 @@
 package programmers.heap;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -9,7 +10,12 @@ public class Disk {
     public static int solution(int[][] jobs) {
         int answer = 0;
 
-        Arrays.sort(jobs, (o1, o2) -> o1[0] - o2[0]);
+        Arrays.sort(jobs, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
         Queue<int[]> queue = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
 
         int count = 0;
