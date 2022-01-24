@@ -13,11 +13,10 @@ public class BigNumber {
             result[i] = String.valueOf(numbers[i]);
         }
 
-        //기본 정렬 조건은 오름차순, 양수일 경우 o1 > o2 이면 o1이 o2 뒤로
         Arrays.sort(result, new Comparator<String>() {
-            @Override       //      3            30
+            @Override
             public int compare(String o1, String o2) {
-                return (o2 + o1).compareTo(o1+o2);//o2+o1 이 더 커서 양수일 경우
+                return (o2 + o1).compareTo(o1 + o2);
             }
         });
 
