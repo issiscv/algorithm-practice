@@ -11,14 +11,12 @@ public class Carpet {
             int j = tmp / i;
 
             if (tmp % i == 0 && j >= 3) {
-                int row = Math.min(i, j);
-                int col = Math.max(i, j);
-
-                int center = (row - 2) * (col - 2);
-
-                if (center == yellow) {
-                    answer[0] = col;
-                    answer[1] = row;
+                int row = Math.max(i, j);
+                int col = Math.min(i, j);
+                int t = (row-2) * (col-2);
+                if (t == yellow) {
+                    answer[0] = row;
+                    answer[1] = col;
                 }
             }
         }

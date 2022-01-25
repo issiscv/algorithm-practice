@@ -5,8 +5,8 @@ import java.util.List;
 
 public class FindPrime {
 
-    static String str;// "17"
     static boolean[] ch;
+    static String str;
     static List<Integer> list = new ArrayList<>();
 
     public static int solution(String numbers) {
@@ -23,42 +23,44 @@ public class FindPrime {
                 answer++;
             }
         }
+
         return answer;
     }
 
-    public static void DFS(int v, String tmp, int dept) {
-        if (v == dept) {
-            if (!list.contains(Integer.parseInt(tmp))) {
-                list.add(Integer.parseInt(tmp));
-                return;
-            }
-        } else {
-            for (int i = 0; i < str.length(); i++) {
-                if (!ch[i]) {
-                    ch[i] = true;
-                    String s = tmp + str.charAt(i);
-                    DFS(v+1, s, dept);
-                    ch[i] = false;
-                }
-            }
-        }
-    }
+    private static boolean isPrime(int i) {
 
-    public static boolean isPrime(int i) {
         boolean flag = true;
         if (i == 0 || i == 1) return false;
+
         for (int j = 2; j < i; j++) {
             if (i % j == 0) {
                 flag = false;
                 break;
             }
         }
+
         return flag;
     }
 
-    public static void main(String[] args) {
-
-        int solution = solution("17");
-        System.out.println(solution);
+    public static void DFS(int v, String s, int dept) {
+        if (v == dept) {
+            if (!list.contains(Integer.parseInt(s))) {
+                list.add(Integer.parseInt(s));
+            }
+        } else {
+            for (int i = 0; i < str.length(); i++) {
+                if (!ch[i]) {
+                    ch[i] = true;
+                    String tmp = s + str.charAt(i);
+                    DFS(v+1, tmp, dept);
+                    ch[i] = false;
+                }
+            }
+        }
     }
+
+    public static void main(String[] args) {
+        System.out.println(solution("17"));
+    }
+
 }
