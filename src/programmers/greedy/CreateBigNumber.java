@@ -6,22 +6,21 @@ public class CreateBigNumber {
 
 
     public static String solution(String number, int k) {
-        int a = k;
         String answer = "";
         Stack<Integer> stack = new Stack<>();
-
-        //10
+        int idx = k;
         for (int i = 0; i < number.length(); i++) {
-            int tmp = number.charAt(i) - '0';
-            while (!stack.isEmpty() && stack.peek() < tmp && k > 0) {
+            int a = number.charAt(i) - '0';
+
+            while (!stack.isEmpty() && a > stack.peek() && k > 0) {
                 stack.pop();
                 k--;
             }
-            stack.push(tmp);
+            stack.push(a);
         }
 
-        for (int i = 0; i < number.length()-a; i++) {
-            answer += String.valueOf(stack.get(i));
+        for (int i = 0; i < number.length() - idx; i++) {
+            answer += stack.get(i);
         }
 
         return answer;
