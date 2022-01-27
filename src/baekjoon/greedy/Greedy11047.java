@@ -1,5 +1,7 @@
 package baekjoon.greedy;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Greedy11047 {
@@ -9,21 +11,22 @@ public class Greedy11047 {
 
         int n = scanner.nextInt();//10
         int k = scanner.nextInt();//4790
-        int[] arr = new int[n];
-
-        int answer = 0;
+        Integer[] arr = new Integer[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = scanner.nextInt();
         }
 
-        for (int i = n-1; i >= 0; i--) {
+        Arrays.sort(arr, Collections.reverseOrder());
+        int count = 0;
+        for (int i = 0; i < n; i++) {
 
             if (arr[i] <= k) {
-               answer += (k / arr[i]);
-               k = k % arr[i];
+                count += k / arr[i];
+                k = k % arr[i];
             }
         }
-        System.out.println(answer);
+
+        System.out.println(count);
     }
 }
