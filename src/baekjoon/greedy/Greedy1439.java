@@ -10,26 +10,27 @@ public class Greedy1439 {
 
         String str = scanner.next();
 
-        char c = str.charAt(0);
-        int one = 0;
         int zero = 0;
+        int one = 0;
 
-        if (c == '0') {
-            one++;
-        } else {
+        if (str.charAt(0) == '0') {
             zero++;
+        } else {
+            one++;
         }
 
         for (int i = 1; i < str.length(); i++) {
             if (str.charAt(i) != str.charAt(i-1)) {
-                if (str.charAt(i) == '0') {
-                    zero++;
-                } else {
+                if (str.charAt(i) == '1') {
                     one++;
+                } else {
+                    zero++;
                 }
             }
         }
+
         System.out.println(Math.min(one, zero));
+
     }
 
 }
