@@ -9,38 +9,33 @@ public class Greedy16953 {
 
         int a = scanner.nextInt();
         int b = scanner.nextInt();
-        int idx = 1;
 
-        boolean flag = true;
+        int idx = 1;
 
         while (b != a) {
 
             if (b < a) {
-                flag = false;
+                idx = -1;
                 break;
             }
 
             String str = String.valueOf(b);
 
-            if (str.charAt(str.length()-1) != '1' && b % 2 != 0) {
-                flag = false;
+            if (b % 2 != 0 && str.charAt(str.length()-1) != '1') {
+                idx = -1;
                 break;
             }
 
             if (b % 2 == 0) {
                 b = b / 2;
             } else {
-                String s = str.substring(0, str.length()-1);
-                b = Integer.parseInt(s);
+                str = str.substring(0, str.length()-1);
+                b = Integer.parseInt(str);
             }
             idx++;
         }
 
-        if (flag) {
-            System.out.println(idx);
-        } else {
-            System.out.println(-1);
-        }
+        System.out.println(idx);
 
     }
 
