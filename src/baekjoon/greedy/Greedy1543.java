@@ -8,28 +8,26 @@ public class Greedy1543 {
         Scanner scanner = new Scanner(System.in);
 
         String document = scanner.nextLine();
-        String find = scanner.nextLine();
+        String keyWord = scanner.nextLine();
+        int answer = 0;
 
+        for (int i = 0; i <= document.length()-keyWord.length(); i++) {
 
-        //abaacbaba
-        //aba
-        int count = 0;	// 단어가 중복되지않고 등장하는 횟수
-        for (int i = 0; i <= document.length() - find.length(); i++) {
             boolean flag = true;
-            for (int j = 0; j < find.length(); j++) {
-                if (document.charAt(i+j) != find.charAt(j)) {
+
+            for (int j = 0; j < keyWord.length(); j++) {
+
+                if (document.charAt(i+j) != keyWord.charAt(j)) {
                     flag = false;
                     break;
                 }
             }
 
             if (flag) {
-                count++;
-                i += find.length()-1;
+                i += keyWord.length() - 1;
+                answer++;
             }
-
         }
-        System.out.println(count);
-
+        System.out.println(answer);
     }
 }

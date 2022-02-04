@@ -6,9 +6,10 @@ import java.util.Scanner;
 public class Greedy2437 {
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();//7
+        int n = scanner.nextInt();
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
@@ -18,15 +19,14 @@ public class Greedy2437 {
         Arrays.sort(arr);
 
         int sum = 0;
-
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < n; i++) {
             if (arr[i] > sum + 1) {
                 break;
             } else {
                 sum += arr[i];
             }
         }
-
-        System.out.println(sum + 1);
+        System.out.println(sum+1);
     }
+
 }
