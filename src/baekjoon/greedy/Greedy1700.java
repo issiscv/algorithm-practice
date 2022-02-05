@@ -9,44 +9,46 @@ public class Greedy1700 {
 
         int N = scanner.nextInt();
         int K = scanner.nextInt();
+
         List<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < K; i++) {
             list.add(scanner.nextInt());
         }
 
-        int answer = 0;
         Set<Integer> set = new HashSet<>();
-        for (int i = 0; i < K; i++) {
-            int t = list.get(i);
+        int answer = 0;
 
-            if (set.contains(t)) continue;
+        for (int i = 0; i < K; i++) {
+            int tmp = list.get(i);
+
+            if (set.contains(tmp)) continue;
             if (set.size() < N) {
-                set.add(t);
+                set.add(tmp);
                 continue;
             }
-            int max = -1;
             int idx = -1;
+            int max = -1;
+            int t = -1;
             for (int s : set) {
-                int tmp = 0;
-                List<Integer> subList;
-                subList = list.subList(i+1, K);
+                List<Integer> subList = list.subList(i+1, K);//2 7
 
+                //남아있는 것 중에 set 에 있는게 있을 경우
                 if (subList.contains(s)) {
-                    tmp = subList.indexOf(s) + 1;
+                    t = subList.indexOf(s);//2의 위치
                 } else {
-                    tmp = K - i -1;
+                    t = K;// K
                 }
-                if (tmp > max) {
-                    max = tmp;
-                    idx = s;
+                
+                if (t > idx) {
+                    idx = t;
+                    max = s;
                 }
             }
-            set.remove(idx);
-            set.add(t);
+            set.remove(max);
+            set.add(tmp);
             answer++;
         }
         System.out.println(answer);
-
     }
 }
