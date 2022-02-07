@@ -4,50 +4,47 @@ import java.util.Scanner;
 
 public class Greedy10775 {
 
-    static int[] fArr;
+    static int[] arr;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int G = scanner.nextInt();//4
-        int P = scanner.nextInt();//6
+        int G = scanner.nextInt();
+        int P = scanner.nextInt();
 
-        fArr = new int[G+1];//4+1
+        arr = new int[G+1];
         for (int i = 0; i <= G; i++) {
-            fArr[i] = i;
+            arr[i] = i;
         }
 
-        int ans = 0;
+        int answer = 0;
+
         for (int i = 0; i < P; i++) {
-            int g = scanner.nextInt();//4 1 1
-            int emptyGate = find(g);//4
+            int tmp = scanner.nextInt();//4
+            int fa = find(tmp);
+            if (fa == 0) break;
 
-            if (emptyGate == 0) {
-                break;
-            }
-
-            ans++;
-            union(emptyGate, emptyGate - 1);
+            union(fa, fa - 1);
+            answer++;
         }
+        System.out.println(answer);
 
-        System.out.println(ans);
     }
 
-    public static void union(int x, int y) {
-        int fa = find(x);//2
-        int fb = find(y);//1
+    private static void union(int x, int y) {
+        int fx = arr[x];//4
+        int fy = arr[y];//3
 
-        if (fa != fb) {
-            fArr[fa] = fb;
+        if (fx != fy) {
+            arr[fx] = fy;
         }
-
     }
 
     public static int find(int a) {
-        if (fArr[a] == a) {
+        if (a == arr[a]) {
             return a;
         } else {
-            return fArr[a] = find(fArr[a]);
+            return arr[a] = find(arr[a]);
         }
     }
 }
