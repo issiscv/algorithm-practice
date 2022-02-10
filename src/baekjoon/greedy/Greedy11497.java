@@ -17,30 +17,31 @@ public class Greedy11497 {
             for (int j = 0; j < N; j++) {
                 arr[j] = scanner.nextInt();
             }
+
             Arrays.sort(arr);
 
-            int[] ans = new int[N];
-            int left = 0;
-            int right = N-1;
-            //2 4 5 7 9
+            int[] result = new int[N];
 
+            int lt = 0;
+            int rt = N - 1;
             for (int j = 0; j < N; j++) {
                 if (j % 2 == 0) {
-                    ans[left++] = arr[j];
+                    result[lt++] = arr[j];
                 } else {
-                    ans[right--] = arr[j];
+                    result[rt--] = arr[j];
                 }
             }
 
             int max = Integer.MIN_VALUE;
-            max = Math.abs(ans[0]-ans[N-1]);
+            max = Math.abs(result[0] - result[N-1]);
 
             for (int j = 1; j < N; j++) {
-                max = Math.max(max, Math.abs(ans[j] - ans[j-1]));
+                max = Math.max(max, Math.abs(result[j] - result[j-1]));
             }
-            System.out.println(max);
-        }
 
+            System.out.println(max);
+
+        }
     }
 
 }
