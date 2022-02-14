@@ -22,7 +22,7 @@ public class Greedy13413 {
                 if (target.charAt(j) != goal.charAt(j)) {
                     if (target.charAt(j) == 'W') {
                         w++;
-                    } else {gi
+                    } else {
                         b++;
                     }
                 }

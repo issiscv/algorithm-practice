@@ -44,22 +44,21 @@ public class Greedy1202 {
         Collections.sort(jewelries);
         Collections.sort(bags);
 
-        int j = 0;
         Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
-        long answer = 0;
-        //가방 개수
+        long sum = 0;
+        int j = 0;
+
         for (int i = 0; i < K; i++) {
 
             while (j < N && jewelries.get(j).weight <= bags.get(i)) {
-                queue.offer(jewelries.get(j++).price);
+                queue.offer(jewelries.get(j).price);
+                j++;
             }
 
-            if (!queue.isEmpty()) {
-                answer += queue.poll();
-            }
+            if (!queue.isEmpty())
+                sum += queue.poll();
         }
 
-        System.out.println(answer);
+        System.out.println(sum);
     }
-
 }

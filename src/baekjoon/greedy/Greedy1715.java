@@ -10,23 +10,22 @@ public class Greedy1715 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        long[] arr = new long[n];
-        Queue<Long> queue = new PriorityQueue<>();
-        for (int i = 0; i < n; i++) {
-            arr[i] = scanner.nextLong();
-            queue.offer(arr[i]);
+        int N = scanner.nextInt();
+        Queue<Integer> queue = new PriorityQueue<>();
+
+        for (int i = 0; i < N; i++) {
+            queue.offer(scanner.nextInt());
         }
-        long sum = 0;
+
+        int sum = 0;
         while (queue.size() > 1) {
-            long a = queue.poll();//10 30
-            long b = queue.poll();//20 40
-            long tmp = a + b;//30 70
-            sum += tmp;//30 + 70
-            queue.offer(tmp);//30 40
+
+            int a = queue.poll();
+            int b = queue.poll();
+            sum += (a+b);
+            queue.offer(a + b);
         }
 
         System.out.println(sum);
-
     }
 }

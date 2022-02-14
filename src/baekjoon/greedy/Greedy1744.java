@@ -8,11 +8,10 @@ public class Greedy1744 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
+        int N = scanner.nextInt();
+        int[] arr = new int[N];
 
-        int[] arr = new int[n];
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < N; i++) {
             arr[i] = scanner.nextInt();
         }
 
@@ -20,11 +19,12 @@ public class Greedy1744 {
 
         int lt = 0;
         int rt = arr.length - 1;
-        int answer = 0;
 
+        //-6 -5 -4 -3 -2 -1 0 1 2 3 4 5
+        int sum = 0;
         for (; lt < rt; lt+=2) {
             if (arr[lt] < 1 && arr[lt+1] < 1) {
-                answer += (arr[lt] * arr[lt+1]);
+                sum += arr[lt] * arr[lt+1];
             } else {
                 break;
             }
@@ -32,17 +32,15 @@ public class Greedy1744 {
 
         for (; rt > 0; rt-=2) {
             if (arr[rt] > 1 && arr[rt-1] > 1) {
-                answer += (arr[rt] * arr[rt-1]);
+                sum += arr[rt] * arr[rt+-1];
             } else {
                 break;
             }
         }
-
-        //-5 -4 -3 -2 -1 0 1 2 3 4 5 6
         for (; lt <= rt ; lt++) {
-            answer += arr[lt];
+            sum += arr[lt];
         }
-
-        System.out.println(answer);
+        System.out.println(sum);
     }
+
 }

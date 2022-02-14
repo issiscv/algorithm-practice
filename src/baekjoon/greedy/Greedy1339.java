@@ -7,34 +7,34 @@ import java.util.Scanner;
 public class Greedy1339 {
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        String[] strArr = new String[n];
-        Integer[] alphabet = new Integer[26];
+        int N = scanner.nextInt();
+        String[] arr = new String[N];
 
-        Arrays.fill(alphabet, 0);
+        Integer[] cArr = new Integer[26];
 
-        for (int i = 0; i < n; i++) {
-            strArr[i] = scanner.next();
+        for (int i = 0; i < N; i++) {
+            arr[i] = scanner.next();
         }
 
-        for (int i = 0; i < n; i++) {
-            String str = strArr[i];
+        Arrays.fill(cArr, 0);
 
-            for (int j = 0; j < str.length(); j++) {
-                int idx = str.charAt(j) - 65;
-                int pow = (int)Math.pow(10, str.length() - (j + 1));
-                alphabet[idx] += pow;
+        for (int i = 0; i < N; i++) {
+            String tmp = arr[i];
+
+            for (int j = 0; j < tmp.length(); j++) {
+                cArr[tmp.charAt(j) - 65] += (int)Math.pow(10, tmp.length() - (j + 1));
             }
         }
 
-        Arrays.sort(alphabet, Collections.reverseOrder());
-        int i = 9;
+        Arrays.sort(cArr, Collections.reverseOrder());
+
         int sum = 0;
-        for (int j = 0; j < 9; j++) {
-            sum += alphabet[j] * i--;
+        int idx = 9;
+        for (int i = 0; i < 9; i++) {
+            sum += idx * cArr[i];
+            idx--;
         }
         System.out.println(sum);
     }
