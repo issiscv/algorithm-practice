@@ -4,55 +4,51 @@ import java.util.*;
 
 public class Greedy1202 {
 
-    private static class Jewelry implements Comparable<Jewelry>{
+    static class Jewelry implements Comparable<Jewelry> {
+        int M;
+        int V;
 
-        int weight;
-        int price;
-
-        public Jewelry(int weight, int price) {
-            this.weight = weight;
-            this.price = price;
+        public Jewelry(int m, int v) {
+            M = m;
+            V = v;
         }
 
         @Override
         public int compareTo(Jewelry o) {
-            return this.weight-o.weight;
+            return this.M - o.M;
         }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int N = scanner.nextInt();//보석 개수
-        int K = scanner.nextInt();//가방 개수
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
 
         List<Jewelry> jewelries = new ArrayList<>();
-        List<Integer> bags = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            int M = scanner.nextInt();//보석 무게
-            int V = scanner.nextInt();//보석 가격
+        List<Integer> list = new ArrayList<>();
 
-            jewelries.add(new Jewelry(M, V));
+        for (int i = 0; i < N; i++) {
+            int m = scanner.nextInt();
+            int v = scanner.nextInt();
+            jewelries.add(new Jewelry(m, v));
         }
 
         for (int i = 0; i < K; i++) {
-            int C = scanner.nextInt();//가방 무게
-
-            bags.add(C);
+            int a = scanner.nextInt();
+            list.add(a);
         }
 
         Collections.sort(jewelries);
-        Collections.sort(bags);
+        Collections.sort(list);
 
-        Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
-        long sum = 0;
         int j = 0;
+        long sum = 0;
+        Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
 
-        for (int i = 0; i < K; i++) {
-
-            while (j < N && jewelries.get(j).weight <= bags.get(i)) {
-                queue.offer(jewelries.get(j).price);
-                j++;
+        for (int i : list) {
+            for (;j < N && jewelries.get(j).M <= i; j++) {
+                queue.offer(jewelries.get(j).V);
             }
 
             if (!queue.isEmpty())
