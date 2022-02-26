@@ -4,31 +4,24 @@ import java.util.Scanner;
 
 public class DP9095 {
 
-    static int cnt = 0;
-    static int n;
+    static int[] dp = new int[11];
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int t = scanner.nextInt();
+        int N = scanner.nextInt();
 
-        for (int i = 0; i < t; i++) {
-            n = scanner.nextInt();
-            recur(0);
-            System.out.println(cnt);
-            cnt = 0;
-        }
-    }
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
 
-    private static void recur(int sum) {
-        if (sum > n) return;
-        if (sum == n) {
-            cnt++;
-            return;
-        }
-        if(sum < n) {
-            for (int j = 1; j <= 3; j++) {
-                recur(sum+j);
+        for (int i = 0; i < N; i++) {
+            int tmp = scanner.nextInt();
+
+            for (int j = 4; j <= tmp; j++) {
+                dp[j] = dp[j-1] + dp[j-2] + dp[j-3];
             }
+            System.out.println(dp[tmp]);
         }
     }
 }
