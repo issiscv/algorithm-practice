@@ -5,24 +5,28 @@ import java.util.Scanner;
 public class DP9465 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int T  = scanner.nextInt();
 
         for (int i = 0; i < T; i++) {
-            int n = sc.nextInt();
-            int[][] arr = new int[2][n + 1];
-            int[][] dp = new int[2][n + 1];
-            for (int j = 0; j < 2; j++) { //초기화
+            int n = scanner.nextInt();
+            int[][] dp = new int[2][n+1];
+            int[][] tmp = new int[2][n+1];
+
+            for (int j = 0; j < 2; j++) {
                 for (int k = 1; k <= n; k++) {
-                    arr[j][k] = sc.nextInt();
+                    tmp[j][k] = scanner.nextInt();
                 }
             }
-            dp[0][1] = arr[0][1];
-            dp[1][1] = arr[1][1];
-            for (int a = 2; a <= n; a++) {
-                dp[0][a] = Math.max(dp[1][a - 1], dp[1][a - 2]) + arr[0][a];
-                dp[1][a] = Math.max(dp[0][a - 1], dp[0][a - 2]) + arr[1][a];
+
+            dp[0][1] = tmp[0][1];
+            dp[1][1] = tmp[1][1];
+
+            for (int j = 2; j <= n; j++) {
+                dp[0][j] = tmp[0][j] + Math.max(dp[1][j-1], dp[1][j-2]);
+                dp[1][j] = tmp[1][j] + Math.max(dp[0][j-1], dp[0][j-2]);
             }
+
             System.out.println(Math.max(dp[0][n], dp[1][n]));
         }
     }
