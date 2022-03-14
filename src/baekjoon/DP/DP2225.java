@@ -11,7 +11,6 @@ public class DP2225 {
         int K = scanner.nextInt();
 
         int[][] dp = new int[N+1][K+1];
-        dp[0][0] = 0;
 
         for (int i = 1; i <= N; i++) {
             dp[i][0] = 0;
