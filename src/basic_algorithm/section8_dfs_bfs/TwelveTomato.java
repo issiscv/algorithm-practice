@@ -8,10 +8,11 @@ public class TwelveTomato {
 
     static int n, m;
     static int[][] arr;
+    static int[][] vi;
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
     static Queue<Node> queue = new LinkedList<>();
-
+    static int answer = 0;
     static class Node {
         int x;
         int y;
@@ -29,6 +30,7 @@ public class TwelveTomato {
         n = scanner.nextInt();//6
         m = scanner.nextInt();//4
         arr = new int[m+1][n+1];
+        vi = new int[m+1][n+1];
 
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
@@ -39,11 +41,26 @@ public class TwelveTomato {
             }
         }
 
-        int answer = BFS();
+        BFS();
+        check();
         System.out.println(answer);
     }
 
-    private static int BFS() {
+    private static void check() {
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (vi[i][j] == 0 && arr[i][j] == 0) {
+                    answer = -1;
+                    return;
+                } else {
+                    answer = Math.max(answer, vi[i][j]);
+                }
+            }
+        }
+    }
+
+
+    private static void BFS() {
         int L = 1;
         while (!queue.isEmpty()) {
 
@@ -57,19 +74,11 @@ public class TwelveTomato {
                     int ny = tmp.y + dy[j];
                     if (nx >= 1 && nx <= m && ny >= 1 && ny <= n && arr[nx][ny] == 0) {
                         arr[nx][ny] = 1;
+                        vi[nx][ny] = vi[tmp.x][tmp.y] + 1;
                         queue.offer(new Node(nx, ny));
                     }
                 }
             }
-            boolean flag = true;
-            for (int i = 1; i <= m; i++) {
-                for (int j = 1; j <= n; j++) {
-                    if (arr[i][j] == 0) flag = false;
-                }
-            }
-            if (flag) return L++;
-            L++;
         }
-        return -1;
     }
 }
