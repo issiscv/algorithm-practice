@@ -1,52 +1,40 @@
 package baekjoon.greedy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Greedy1783 {
 
-    private static class Study implements Comparable<Study> {
-        int start;
-        int end;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        public Study(int start, int end) {
-            this.start = start;
-            this.end = end;
+
+        int result = 0;
+
+        if(N == 1) {
+            // N이 1이면 이동 불가 (시작지점만)
+            result = 1;
+        }else if(N == 2) {
+            // N이 2일 떈, 2번,3번 방향으로만 움직일 수 있음
+            // 절대 4방향 다 움직일 수 없어서 최댓값은 4
+            result = Math.min((M+1)/2, 4);
         }
-
-        @Override
-        public int compareTo(Study o) {
-            if (this.start == o.start) {
-                return this.end - o.end;
+        else if(N>=3){
+            // M=7 부터 4방향 다 이동 가능
+            // 4방향 다 이동한 후에는 y값이 1씩 증가하는 1번,4번 이동을 반복
+            // 즉, M-2개의 칸을 갈 수 있음
+            if(M < 7) {
+                result = Math.min(M, 4);
+            }else {
+                result = M-2;
             }
-            return this.start - o.start;
         }
+
+        System.out.println(result);
     }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int n = scanner.nextInt();
-        List<Study> list = new ArrayList<>();
-
-        for (int i = 0; i < n; i++) {
-            int s = scanner.nextInt();
-            int e = scanner.nextInt();
-
-            list.add(new Study(s, e));
-        }
-
-        Collections.sort(list);
-
-        Queue<Integer> queue = new PriorityQueue<>();
-
-        for (Study study : list) {
-
-            if (!queue.isEmpty() && queue.peek() <= study.start) {
-                queue.poll();
-            }
-            queue.offer(study.end);
-        }
-        System.out.println(queue.size());
-    }
-
 }

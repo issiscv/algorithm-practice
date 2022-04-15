@@ -1,5 +1,8 @@
 package baekjoon.greedy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,26 +10,28 @@ import java.util.Scanner;
 
 public class Greedy10610 {
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String s = scan.next();
-        List<Integer> list = new ArrayList<>();
-        int sum = 0;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (int i = 0; i < s.length(); i++) {
-            sum += s.charAt(i) - '0';
-            list.add(s.charAt(i) - '0');
+        String N = br.readLine();
+
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < N.length(); i++) {
+            list.add(N.charAt(i) - '0');
         }
 
         Collections.sort(list);
 
+        int sum = 0;
+        for (int i = 0; i < N.length(); i++) {
+            sum += list.get(i);
+        }
+
         if (list.get(0) == 0 && sum % 3 == 0) {
-            for (int i = list.size() - 1; i >= 0; i--) {
+            for (int i = N.length() - 1; i >= 0; i--) {
                 System.out.print(list.get(i));
             }
-        } else {
+        } else
             System.out.println(-1);
-        }
     }
-
 }
