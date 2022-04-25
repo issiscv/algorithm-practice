@@ -4,13 +4,16 @@ import java.util.Scanner;
 
 public class NineGuessCombination {
 
-    static int n, m;
-    static int[] c;
+    private static int n;
+    private static int m;
+    private static int[] c;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         n = scanner.nextInt();
         m = scanner.nextInt();
+
         c = new int[m];
 
         DFS(0, 1);
@@ -29,5 +32,4 @@ public class NineGuessCombination {
             }
         }
     }
-
 }
