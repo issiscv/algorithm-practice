@@ -9,24 +9,24 @@ public class DP11722 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        int[] arr = new int[N+1];
-        int[] rdp = new int[N+1];
+        int[] arr = new int[N];
+        int[] dp = new int[N];
 
-        for (int i = 1; i <= N; i++) {
+        for (int i = N-1; i >= 0; i--) {
             arr[i] = scanner.nextInt();
         }
-        rdp[N] = 1;
 
-
-        for (int i = N-1; i >= 1; i--) {
-            for (int j = N; j >= i; j--) {
+        dp[0] = 1;
+        for (int i = 1; i < N; i++) {
+            for (int j = 0; j <= i; j++) {
                 if (arr[j] < arr[i]) {
-                    rdp[i] = Math.max(rdp[i], rdp[j]);
+                    dp[i] = Math.max(dp[j], dp[i]);
                 }
             }
-            rdp[i] += 1;
+            dp[i] += 1;
         }
 
-        System.out.println(Arrays.stream(rdp).max().getAsInt());
+        System.out.println(Arrays.stream(dp).max().getAsInt());
     }
+
 }

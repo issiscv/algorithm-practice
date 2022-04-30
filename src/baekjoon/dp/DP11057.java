@@ -10,25 +10,25 @@ public class DP11057 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        int[][] dp = new int[N+1][10];
 
-        for (int i = 0; i < 10; i++) {
-            dp[1][i] = 1;
+        int[][] arr = new int[N+1][10];
+        for (int i = 0; i <= 9; i++) {
+            arr[1][i] = 1;
         }
 
         for (int i = 2; i <= N; i++) {
             for (int j = 0; j <= 9; j++) {
                 for (int k = 0; k <= j; k++) {
-                    dp[i][j] += (dp[i-1][k] % MOD);
+                    arr[i][j] += (arr[i-1][k] % MOD);
                 }
             }
         }
 
-        int sum = 0;
-        for (int j = 0; j < 10; j++) {
-            System.out.println(dp[N][j]);
-            sum += dp[N][j];
+        long sum = 0;
+        for (int i = 0; i <= 9; i++) {
+            sum += arr[N][i] % MOD;
         }
-        System.out.println(sum % MOD);
+
+        System.out.println(sum);
     }
 }
