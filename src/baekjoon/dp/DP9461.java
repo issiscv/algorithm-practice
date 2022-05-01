@@ -7,9 +7,9 @@ public class DP9461 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        int T = scanner.nextInt();
         long[] dp = new long[101];
 
-        dp[0] = 0;
         dp[1] = 1;
         dp[2] = 1;
         dp[3] = 1;
@@ -20,11 +20,10 @@ public class DP9461 {
             dp[i] = dp[i-1] + dp[i-5];
         }
 
-        int t = scanner.nextInt();
-
-        for (int i = 0; i < t; i++) {
+        for (int i = 0; i < T; i++) {
             int n = scanner.nextInt();
             System.out.println(dp[n]);
         }
     }
+
 }
