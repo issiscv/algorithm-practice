@@ -8,28 +8,28 @@ import java.util.*;
 public class Sort11652 {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         long N = Long.parseLong(br.readLine());
-        Map<Long, Long> map = new HashMap<>();
+        Map<Long, Integer> map = new HashMap<>();
+
         for (int i = 0; i < N; i++) {
             long a = Long.parseLong(br.readLine());
-            map.put(a, map.getOrDefault(a, 0L) + 1);
+            map.put(a, map.getOrDefault(a, 0) + 1);
         }
 
         long max = Long.MIN_VALUE;
         long number = -1;
+
         for (Long key : map.keySet()) {
-            Long value = map.get(key);
+            Integer value = map.get(key);
             if (value > max) {
-                number = key;
                 max = value;
-            } else if (max == value) {
+                number = key;
+            } else if (value == max) {
                 number = Math.min(number, key);
             }
         }
-
         System.out.println(number);
-
     }
 }

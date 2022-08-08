@@ -1,9 +1,9 @@
 package baekjoon.sort;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Sort10825 {
 
@@ -23,8 +23,7 @@ public class Sort10825 {
 
         @Override
         public int compareTo(Score o) {
-
-            if (o.kor == this.kor) {
+            if (this.kor == o.kor) {
                 if (this.eng == o.eng) {
                     if (this.math == o.math) {
                         return this.name.compareTo(o.name);
@@ -33,23 +32,26 @@ public class Sort10825 {
                 }
                 return this.eng - o.eng;
             }
-
             return o.kor - this.kor;
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        int N = scanner.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
 
         List<Score> list = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
-            String name = scanner.next();
-            int kor = scanner.nextInt();
-            int eng = scanner.nextInt();
-            int math = scanner.nextInt();
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            String name = st.nextToken();
+            int kor = Integer.parseInt(st.nextToken());
+            int eng = Integer.parseInt(st.nextToken());
+            int math = Integer.parseInt(st.nextToken());
+
             list.add(new Score(name, kor, eng, math));
         }
 
@@ -58,6 +60,6 @@ public class Sort10825 {
         for (Score score : list) {
             System.out.println(score.name);
         }
-
     }
+
 }

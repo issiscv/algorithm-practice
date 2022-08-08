@@ -1,16 +1,15 @@
 package baekjoon.sort;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Sort11650 {
 
-    private static class Point implements Comparable<Point> {
-
-        int x;
-        int y;
+    static class Point implements Comparable<Point> {
+        private int x;
+        private int y;
 
         public Point(int x, int y) {
             this.x = x;
@@ -26,24 +25,28 @@ public class Sort11650 {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = scanner.nextInt();
+        int N = Integer.parseInt(br.readLine());
 
         List<Point> list = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-            list.add(new Point(x, y));
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+
+            Point point = new Point(x, y);
+            list.add(point);
         }
 
         Collections.sort(list);
+        StringBuilder sb = new StringBuilder();
         for (Point point : list) {
-            System.out.println(point.x + " " + point.y);
+            sb.append(point.x + " " + point.y).append("\n");
         }
-
+        System.out.println(sb.toString());
     }
 }

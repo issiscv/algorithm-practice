@@ -1,28 +1,29 @@
 package baekjoon.sort;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Sort2751 {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = scanner.nextInt();
-
+        int N = Integer.parseInt(br.readLine());
         List<Integer> list = new ArrayList<>();
+
         for (int i = 0; i < N; i++) {
-            list.add(scanner.nextInt());
+            list.add(Integer.parseInt(br.readLine()));
         }
 
         Collections.sort(list);
+
         StringBuilder sb = new StringBuilder();
-
-        for (Integer i : list) {
-            sb.append(i).append("\n");
+        for (int i = 0; i < N; i++) {
+            sb.append(list.get(i)).append("\n");
         }
-
         System.out.println(sb.toString());
 
     }
-
 }
