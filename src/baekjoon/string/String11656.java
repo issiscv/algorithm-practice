@@ -8,18 +8,18 @@ public class String11656 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String S = scanner.next();
+        String str = scanner.next();
 
-        String[] arr = new String[S.length()];
+        String[] arr = new String[str.length()];
 
-        for (int i = 0; i < S.length(); i++) {
-            arr[i] = S.substring(i);
+        for (int i = 0; i < str.length(); i++) {
+            arr[i] = str.substring(i);
         }
 
         Arrays.sort(arr);
 
-        for (String s : arr) {
-            System.out.println(s);
+        for (int i = 0; i < str.length(); i++) {
+            System.out.println(arr[i]);
         }
 
     }

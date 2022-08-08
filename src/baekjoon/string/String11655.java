@@ -3,35 +3,41 @@ package baekjoon.string;
 import java.util.Scanner;
 
 public class String11655 {
-
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
-        String S = scanner.nextLine();
+        String str = scanner.nextLine();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
 
-        for (int i = 0; i < S.length(); i++) {
-            char c = S.charAt(i);
+            if (Character.isLowerCase(c)) {
+                int asc = c - 'a';
+                int addAsc = asc + 13;
 
-            if (Character.isAlphabetic(c)) {
-                if (Character.isUpperCase(c)) {
-                    if (c + 13 >= 65 && c + 13 <= 90) {
-                        System.out.print((char)(c + 13));
-                    } else if (c + 13 > 90) {
-                        System.out.print((char)(c + 13 - 26));
-                    }
+                if (addAsc >= 'a' - 'a' && addAsc <= 'z' - 'a') {
+                    sb.append((char)(addAsc + 'a'));
                 } else {
-                    if (c + 13 >= 97 && c + 13 <= 122) {
-                        System.out.print((char)(c + 13));
-                    } else if (c + 13 > 122) {
-                        System.out.print((char)(c + 13 - 26));
-                    }
+                    int tmp = addAsc - 'z' + 'a' - 1;
+                    sb.append((char)(tmp + 'a'));
                 }
-            } else if (Character.isDigit(c)) {
-                System.out.print(c);
-            } else {
-                System.out.print(c);
-            }
 
+            } else if (Character.isUpperCase(c)) {
+                int asc = c - 'A';
+                int addAsc = asc + 13;
+
+                if (addAsc >= 'A' - 'A' && addAsc <= 'Z' - 'A') {
+                    sb.append((char)(addAsc + 'A'));
+                } else {
+                    int tmp = addAsc - 'Z' + 'A' - 1;
+                    sb.append((char)(tmp + 'A'));
+                }
+            } else {
+                sb.append(c);
+            }
         }
+
+        System.out.println(sb.toString());
     }
 }

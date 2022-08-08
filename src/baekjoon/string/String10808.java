@@ -7,20 +7,18 @@ public class String10808 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String s = scanner.next();
+        String str = scanner.next();
 
         int[] arr = new int[26];
 
-        for (int i = 0; i < s.length(); i++) {
-            char tmp = s.charAt(i);
-            int asc = (int) tmp;
-
-            arr[asc-97]++;
+        for (int i = 0; i < str.length(); i++) {
+            int idx = str.charAt(i) - 'a';
+            arr[idx]++;
         }
 
-        for (int i : arr) {
-            System.out.print(i + " ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
+
     }
-
 }

@@ -19,19 +19,24 @@ public class Etc1158 {
             queue.offer(i);
         }
 
-        int cnt = 1;
         StringBuilder sb = new StringBuilder();
         sb.append("<");
 
-        while (queue.size() > 1) {
-            if (cnt % K == 0)
-                sb.append(queue.poll() + ", ");
-            else
+        while (!queue.isEmpty()) {
+
+            for (int i = 0; i < K - 1; i++) {
                 queue.offer(queue.poll());
-            cnt++;
+            }
+            int poll = queue.poll();
+
+            if (queue.isEmpty()) {
+                sb.append(poll + ">");
+            } else {
+                sb.append(poll + ", ");
+            }
         }
 
-        sb.append(queue.poll() + ">");
-        System.out.println(sb);
+        System.out.println(sb.toString());
+
     }
 }
