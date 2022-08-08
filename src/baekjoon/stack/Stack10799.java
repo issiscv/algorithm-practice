@@ -14,20 +14,20 @@ public class Stack10799 {
         int sum = 0;
 
         for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
 
-            if (str.charAt(i) == '(') stack.push('(');
-            else {
-                stack.pop();
-
-                if (str.charAt(i-1) == ')') {
-                    sum += 1;
-                } else {
+            if (c == '(') {
+                stack.push('(');
+            } else if (c == ')') {
+                if (str.charAt(i-1) == '(') {
+                    stack.pop();
                     sum += stack.size();
+                } else {
+                    stack.pop();
+                    sum += 1;
                 }
             }
         }
-
         System.out.println(sum);
     }
-
 }
