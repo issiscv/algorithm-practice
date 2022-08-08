@@ -7,21 +7,22 @@ import java.util.Scanner;
 
 public class Sort11650 {
 
-    static class Point implements Comparable<Point>{
-        int X;
-        int Y;
+    private static class Point implements Comparable<Point> {
+
+        int x;
+        int y;
 
         public Point(int x, int y) {
-            X = x;
-            Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         @Override
         public int compareTo(Point o) {
-            if (this.X == o.X) {
-                return this.Y - o.Y;
+            if (this.x == o.x) {
+                return this.y - o.y;
             }
-            return this.X - o.X;
+            return this.x - o.x;
         }
     }
 
@@ -29,6 +30,7 @@ public class Sort11650 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
+
         List<Point> list = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
@@ -39,9 +41,9 @@ public class Sort11650 {
         }
 
         Collections.sort(list);
-
         for (Point point : list) {
-            System.out.println(point.X + " " + point.Y);
+            System.out.println(point.x + " " + point.y);
         }
+
     }
 }

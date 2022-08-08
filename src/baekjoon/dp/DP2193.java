@@ -9,14 +9,14 @@ public class DP2193 {
 
         int N = scanner.nextInt();
 
-        long[] arr = new long[91];
-
-        arr[1] = 1;
-        arr[2] = 1;
+        long[] dp = new long[91];
+        dp[1] = 1;
+        dp[2] = 1;
 
         for (int i = 3; i <= N; i++) {
-            arr[i] = arr[i-1] + arr[i-2];
+            dp[i] = dp[i-1] + dp[i-2];
         }
-        System.out.println(arr[N]);
+
+        System.out.println(dp[N]);
     }
 }

@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class Sort10825 {
 
-    private static class Score implements Comparable<Score>{
+    private static class Score implements Comparable<Score> {
+
         String name;
         int kor;
         int eng;
@@ -23,9 +24,9 @@ public class Sort10825 {
         @Override
         public int compareTo(Score o) {
 
-            if (this.kor == o.kor) {
+            if (o.kor == this.kor) {
                 if (this.eng == o.eng) {
-                    if (this.math == o.math){
+                    if (this.math == o.math) {
                         return this.name.compareTo(o.name);
                     }
                     return o.math - this.math;
@@ -41,6 +42,7 @@ public class Sort10825 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
+
         List<Score> list = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
@@ -48,7 +50,6 @@ public class Sort10825 {
             int kor = scanner.nextInt();
             int eng = scanner.nextInt();
             int math = scanner.nextInt();
-
             list.add(new Score(name, kor, eng, math));
         }
 
@@ -57,6 +58,6 @@ public class Sort10825 {
         for (Score score : list) {
             System.out.println(score.name);
         }
-    }
 
+    }
 }

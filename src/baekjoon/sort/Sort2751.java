@@ -8,20 +8,20 @@ public class Sort2751 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        List<Integer> list = new ArrayList<>();
 
+        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            int a = scanner.nextInt();
-            list.add(a);
+            list.add(scanner.nextInt());
         }
 
         Collections.sort(list);
         StringBuilder sb = new StringBuilder();
-        for(Integer c : list) {
-            sb.append(c).append("\n");
+
+        for (Integer i : list) {
+            sb.append(i).append("\n");
         }
 
-        System.out.println(sb);
+        System.out.println(sb.toString());
 
     }
 
