@@ -18,17 +18,15 @@ public class Math11005 {
 
         StringBuilder sb = new StringBuilder();
         while (N != 0) {
-            int tmp = N % B;
+            int tmp = (N % B);
 
             if (tmp >= 10) {
                 sb.append(arr[tmp - 10]);
             } else {
                 sb.append(tmp);
             }
-
             N = N / B;
         }
-        StringBuilder reverse = new StringBuilder(sb.toString()).reverse();
-        System.out.println(reverse);
+        System.out.println(sb.reverse().toString());
     }
 }

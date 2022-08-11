@@ -9,23 +9,14 @@ public class Math1676 {
 
         int N = scanner.nextInt();
 
-        int two = 0;
-        int five = 0;
+        int cnt = 0;
 
-        for (int i = 1; i <= N; i++) {
-            int n = i;
-            while (n % 2 == 0) {
-                two++;
-                n = n / 2;
-            }
-
-            while (n % 5 == 0) {
-                five++;
-                n = n / 5;
-            }
+        while (N >= 5) {
+            cnt += N / 5;
+            N = N / 5;
         }
 
-        System.out.println(Math.min(two, five));
+        System.out.println(cnt);
     }
 }
 

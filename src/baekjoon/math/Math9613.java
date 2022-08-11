@@ -19,12 +19,14 @@ public class Math9613 {
                 arr[j] = scanner.nextInt();
             }
             long sum = 0;
+
             for (int j = 0; j < N; j++) {
-                for (int k = j + 1; k < N; k++) {
+                for (int k = j+1; k < N; k++) {
                     long gcd = gcd(arr[j], arr[k]);
                     sum += gcd;
                 }
             }
+
             sb.append(sum).append("\n");
         }
 

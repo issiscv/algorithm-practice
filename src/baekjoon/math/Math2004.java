@@ -16,23 +16,23 @@ public class Math2004 {
         System.out.println(Math.min(five, two));
     }
 
-    private static int find5(int i) {
+    public static int find5(int n) {
         int cnt = 0;
-        while (i >= 5) {
-            cnt += i / 5;
-            i = i / 5;
+        while (n >= 5) {
+            cnt += n / 5;
+            n = n / 5;
         }
-
         return cnt;
     }
 
-    private static int find2(int i) {
+    public static int find2(int n) {
         int cnt = 0;
-        while (i >= 2) {
-            cnt += i / 2;
-            i = i / 2;
+        while (n >= 2) {
+            cnt += n / 2;
+            n = n / 2;
         }
-
         return cnt;
+
     }
+
 }

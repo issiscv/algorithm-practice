@@ -9,13 +9,14 @@ public class Math10872 {
 
         int N = scanner.nextInt();
 
-        System.out.println(recursive(N));
+        long recursive = recursive(N);
+        System.out.println(recursive);
     }
 
-    public static long recursive(int n) {
-        if (n == 0)
-            return 1;
+    private static long recursive(int n) {
+        if (n == 0) return 1;
         if (n == 1) return 1;
         return n * recursive(n-1);
     }
+
 }
