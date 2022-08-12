@@ -8,41 +8,33 @@ public class EightBinarySearch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
 
-        int[] arr = new int[n];
-
-        for (int i = 0; i < n; i++) {
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
             arr[i] = scanner.nextInt();
         }
 
-        int solution = solution(m, arr);
-        System.out.println(solution);
-    }
-
-    private static int solution(int m, int[] arr) {
-
         Arrays.sort(arr);
 
+        for (int i = 0; i < N; i++) {
+            System.out.println(arr[i]);
+        }
+
         int lt = 0;
-        int rt = arr.length - 1;
-        int answer = 0;
+        int rt = N-1;
+
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
 
-            if (arr[mid] == m) {
-                answer = mid+1;
-                break;
-            }
-
-            if (arr[mid] > m) {
-                rt = mid - 1;
+            if (arr[mid] <= M) {
+                lt = mid+1;
             } else {
-                lt = mid + 1;
+                rt = mid-1;
             }
         }
-        return answer;
 
+        System.out.println(lt);
     }
 }

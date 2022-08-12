@@ -8,53 +8,46 @@ public class NineMusicVideo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        int[] arr = new int[n];
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
 
-        for (int i = 0; i < n; i++) {
+        int[] arr = new int[N];
+
+        for (int i = 0; i < N; i++) {
             arr[i] = scanner.nextInt();
         }
 
-        int solution = solution(arr, m);
-        System.out.println(solution);
-    }
-
-    private static int solution(int[] arr, int m) {
-
-        int lt = Arrays.stream(arr).max().getAsInt();
+        int lt = arr[N-1];
         int rt = Arrays.stream(arr).sum();
 
         int answer = 0;
-
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
 
-            int count = extract(arr, mid);
-
-            if (count > m) {
+            if (record(mid, arr) > M) {
                 lt = mid + 1;
             } else {
                 rt = mid - 1;
                 answer = mid;
             }
         }
-        return answer;
+
+        System.out.println(answer);
     }
 
-    private static int extract(int[] arr, int mid) {
-
+    private static int record(int minute, int[] arr) {
+        int cnt = 1;
         int sum = 0;
-        int count = 1;
-
         for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-            if (sum > mid) {
-                count++;
+
+            if (sum + arr[i] > minute) {
                 sum = arr[i];
+                cnt++;
+            } else {
+                sum += arr[i];
             }
         }
 
-        return count;
+        return cnt;
     }
 }

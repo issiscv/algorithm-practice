@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class BinarySearch2805 {
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        int M = scanner.nextInt();
+        int K = scanner.nextInt();
 
         int[] arr = new int[N];
         for (int i = 0; i < N; i++) {
@@ -17,11 +18,11 @@ public class BinarySearch2805 {
         }
 
         long lt = 0;
-        long rt = Arrays.stream(arr).max().getAsInt() + 1;
+        long rt = Arrays.stream(arr).max().getAsInt();
 
         while (lt < rt) {
-            long mid = (lt + rt) / 2;
 
+            long mid = (lt + rt) / 2;
             long sum = 0;
             for (int i = 0; i < N; i++) {
                 long result = arr[i] - mid;
@@ -29,14 +30,12 @@ public class BinarySearch2805 {
                     sum += result;
             }
 
-            if (sum >= M) {
+            if (sum >= K) {
                 lt = mid + 1;
             } else {
                 rt = mid;
             }
         }
-
         System.out.println(lt-1);
     }
-
 }
