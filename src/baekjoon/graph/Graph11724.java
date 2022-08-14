@@ -7,16 +7,15 @@ import java.util.Scanner;
 
 public class Graph11724 {
 
-    private static List<List<Integer>> list;
+    private static List<List<Integer>> list = new ArrayList<>();
     private static boolean[] ch;
-
+            
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
         int M = scanner.nextInt();
-
-        list = new ArrayList<>();
+        
         ch = new boolean[N+1];
         Arrays.fill(ch, true);
 
@@ -31,6 +30,7 @@ public class Graph11724 {
             list.get(a).add(b);
             list.get(b).add(a);
         }
+
         int cnt = 0;
         for (int i = 1; i <= N; i++) {
             if (ch[i]) {
@@ -38,14 +38,18 @@ public class Graph11724 {
                 cnt++;
             }
         }
+
         System.out.println(cnt);
     }
 
-    private static void DFS(int v) {
+    public static void DFS(int v) {
         ch[v] = false;
-        for (int i : list.get(v)) {
-            if (ch[i])
-                DFS(i);
+
+        for (int tmp : list.get(v)) {
+            if (ch[tmp]) {
+                DFS(tmp);
+            }
         }
     }
+
 }

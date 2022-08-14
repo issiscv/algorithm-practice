@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Graph2331 {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -15,21 +16,21 @@ public class Graph2331 {
         list.add(A);
 
         while (true) {
-            int tmp = list.get(list.size()-1);
-            int result = 0;
+            int sum = 0;
+            int tmp = list.get(list.size() - 1);
 
-            while (tmp > 0) {
-                result += Math.pow(tmp % 10, P);
+            while (tmp != 0) {
+                sum += (int)Math.pow(tmp % 10, P);
                 tmp = tmp / 10;
             }
 
-            if (list.contains(result)) {
-                int i = list.indexOf(result);
-                System.out.println(i);
+            if (list.contains(sum)) {
+                int answer = list.indexOf(sum);
+                System.out.println(answer);
                 break;
             }
 
-            list.add(result);
+            list.add(sum);
         }
     }
 }

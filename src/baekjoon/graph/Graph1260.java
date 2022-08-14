@@ -4,35 +4,9 @@ import java.util.*;
 
 public class Graph1260 {
 
-    private static List<List<Integer>> list;
-    private static boolean[] arr;
+    public static List<List<Integer>> list = new ArrayList<>();
+    public static boolean[] arr;
 
-    public static void DFS(int v) {
-
-        System.out.print(v + " ");
-        arr[v] = false;
-        for (int i : list.get(v)) {
-            if (arr[i])
-                DFS(i);
-        }
-    }
-
-    private static void BFS(int v) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(v);
-        arr[v] = false;
-
-        while (!queue.isEmpty()) {
-            int poll = queue.poll();
-            System.out.print(poll + " ");
-            for (int i : list.get(poll)) {
-                if (arr[i]) {
-                    queue.offer(i);
-                    arr[i] = false;
-                }
-            }
-        }
-    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +15,6 @@ public class Graph1260 {
         int M = scanner.nextInt();
         int V = scanner.nextInt();
 
-        list = new ArrayList<>();
         arr = new boolean[N+1];
         Arrays.fill(arr, true);
 
@@ -62,8 +35,38 @@ public class Graph1260 {
         }
 
         DFS(V);
-        System.out.println();
         Arrays.fill(arr, true);
+        System.out.println();
         BFS(V);
+    }
+
+    public static void DFS(int v) {
+        System.out.print(v + " ");
+        arr[v] = false;
+
+        for (int tmp : list.get(v)) {
+            if (arr[tmp]) {
+                DFS(tmp);
+            }
+        }
+    }
+    
+    public static void BFS(int v) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(v);
+        arr[v] = false;
+        System.out.print(v + " ");
+
+        while (!queue.isEmpty()) {
+            int tmp = queue.poll();
+
+            for (int t : list.get(tmp)) {
+                if (arr[t]) {
+                    queue.offer(t);
+                    arr[t] = false;
+                    System.out.print(t + " ");
+                }
+            }
+        }
     }
 }
