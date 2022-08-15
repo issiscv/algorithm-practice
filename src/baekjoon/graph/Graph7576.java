@@ -7,13 +7,14 @@ import java.util.Scanner;
 
 public class Graph7576 {
 
-    private static Queue<Node> queue = new LinkedList<>();
-    private static int[] dx = {-1, 0, 1, 0};
-    private static int[] dy = {0, 1, 0, -1};
-    private static int[][] arr;
-    private static int[][] ch;
-    private static int m;
-    private static int n;
+    static int cnt = 0;
+    static int b;
+    static int a;
+    static int[][] arr;
+    static Queue<Node> queue = new LinkedList<>();
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
+
 
     private static class Node {
         int x;
@@ -28,14 +29,13 @@ public class Graph7576 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        m = scanner.nextInt();
-        n = scanner.nextInt();
+        a = scanner.nextInt();
+        b = scanner.nextInt();
 
-        arr = new int[n +1][m +1];
-        ch = new int[n +1][m +1];
+        arr = new int[b+1][a+1];
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
+        for (int i = 1; i <= b; i++) {
+            for (int j = 1; j <= a; j++) {
                 arr[i][j] = scanner.nextInt();
                 if (arr[i][j] == 1) {
                     queue.offer(new Node(i, j));
@@ -45,44 +45,40 @@ public class Graph7576 {
 
         BFS();
 
-        int check = check();
-        System.out.println(check);
-
-    }
-
-    private static int check() {
-        int max = Integer.MIN_VALUE;
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                if (ch[i][j] == 0 && arr[i][j] == 0) {
-                    return -1;
-                } else {
-                    max = Math.max(max, ch[i][j]);
+        for (int i = 1; i <= b; i++) {
+            for (int j = 1; j <= a; j++) {
+                if (arr[i][j] == 0) {
+                    System.out.println(-1);
+                    return;
                 }
             }
         }
-        return max;
+
+        System.out.println(cnt-1);
     }
 
     private static void BFS() {
 
         while (!queue.isEmpty()) {
 
-            for (int i = 0; i < queue.size(); i++) {
-                Node tmp = queue.poll();
+            int size = queue.size();
 
-                for (int j = 0; j < 4; j++) {
-                    int nx = tmp.x + dx[j];
-                    int ny = tmp.y + dy[j];
+            for (int i = 0; i < size; i++) {
+                Node poll = queue.poll();
+                int x = poll.x;
+                int y = poll.y;
 
-                    if (nx >= 1 && nx <= n && ny >= 1 && ny <= m && arr[nx][ny] == 0) {
-                        ch[nx][ny] = ch[tmp.x][tmp.y] + 1;
+                for (int k = 0; k < 4; k++) {
+                    int nx = x + dx[k];
+                    int ny = y + dy[k];
+
+                    if (nx >= 1 && nx <= b && ny >=1 && ny <= a && arr[nx][ny] == 0) {
                         queue.offer(new Node(nx, ny));
                         arr[nx][ny] = 1;
                     }
                 }
             }
+            cnt++;
         }
-
     }
 }

@@ -6,56 +6,57 @@ import java.util.Scanner;
 
 public class Graph4963 {
 
-    private static int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
-    private static int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
-    private static int[][] arr;
-    private static int w;
-    private static int h;
-    private static int cnt;
+    static int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
+    static int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
+    static int[][] arr;
+    static int a;
+    static int b;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
         while (true) {
-            w = scanner.nextInt();
-            h = scanner.nextInt();
+            a = scanner.nextInt();
+            b = scanner.nextInt();
 
-            if (w == 0 && h == 0) {
-                break;
+            if (a == 0 && b == 0) {
+                return;
             }
 
-            arr = new int[h + 1][w + 1];
-            for (int i = 1; i <= h; i++) {
-                for (int j = 1; j <= w; j++) {
+            arr = new int[b+1][a+1];
+
+            for (int i = 1; i <= b; i++) {
+                for (int j = 1; j <= a; j++) {
                     arr[i][j] = scanner.nextInt();
                 }
             }
 
-            cnt = 0;
-            for (int i = 1; i <= h; i++) {
-                for (int j = 1; j <= w; j++) {
+
+            int cnt = 0;
+            for (int i = 1; i <= b; i++) {
+                for (int j = 1; j <= a; j++) {
                     if (arr[i][j] == 1) {
                         DFS(i, j);
                         cnt++;
                     }
                 }
             }
-            System.out.println(cnt);
 
+            System.out.println(cnt);
         }
     }
 
-    private static void DFS(int i, int j) {
+    private static void DFS(int x, int y) {
+        arr[x][y] = 0;
 
-        for (int k = 0; k < 8; k++) {
-            int nx = i + dx[k];
-            int ny = j + dy[k];
+        for (int i = 0; i < 8; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
 
-            if (nx >= 1 && nx <= h && ny >=1 && ny <= w && arr[nx][ny] == 1) {
-                arr[nx][ny] = 0;
+            if (nx >= 1 && nx <= b && ny >= 1 && ny <= a && arr[nx][ny] == 1) {
                 DFS(nx, ny);
             }
         }
+
     }
 }
