@@ -6,61 +6,65 @@ import java.util.Scanner;
 
 public class Graph1167 {
 
-    private static List<List<Node>> list;
-    private static boolean[] visit;
-    private static int v;
-    private static int max = Integer.MIN_VALUE;
+    static List<List<Node>> list = new ArrayList<>();
+    static boolean[] visited;
+    static int max = Integer.MIN_VALUE;
 
     private static class Node {
-        int node;
-        int value;
+        int data;
+        int distance;
 
-        public Node(int node, int value) {
-            this.node = node;
-            this.value = value;
+        public Node(int data, int distance) {
+            this.data = data;
+            this.distance = distance;
         }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        v = scanner.nextInt();
-        list = new ArrayList<>();
-        visit = new boolean[v +1];
+        int N = scanner.nextInt();
 
-        for (int i = 0; i <= v; i++) {
+        visited = new boolean[N+1];
+
+        for (int i = 0; i <= N; i++) {
             list.add(new ArrayList<>());
         }
 
-        for (int i = 1; i <= v; i++) {
-            int node = scanner.nextInt();
+        for (int i = 0; i < N; i++) {
+            int a = scanner.nextInt();
             while (true) {
-                int tNode = scanner.nextInt();
-                if (tNode == -1) break;
-                int value = scanner.nextInt();
+                int b = scanner.nextInt();
+                if (b == -1) break;
+                int distance = scanner.nextInt();
 
-                list.get(node).add(new Node(tNode, value));
+                list.get(a).add(new Node(b, distance));
             }
         }
 
         DFS(1, 0);
-        visit = new boolean[v +1];
+        visited = new boolean[N +1];
         DFS(node, 0);
 
         System.out.println(max);
     }
 
     private static int node;
+
     private static void DFS(int v, int sum) {
         if(sum > max) {
             max = sum;
             node = v;
         }
-        visit[v] = true;
+        visited[v] = true;
+        max = Math.max(max, sum);
         for (Node node : list.get(v)) {
-            if (!visit[node.node]) {
-                DFS(node.node, sum + node.value);
+                int data = node.data;
+                int distance = node.distance;
+                if (!visited[data]) {
+                    int answer = sum + distance;
+                    DFS(data, answer);
+                }
             }
-        }
     }
 }

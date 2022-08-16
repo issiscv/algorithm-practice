@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Graph1991 {
 
+    private static List<Node> list;
+
     private static class Node {
         char data;
         Node lt;
@@ -20,13 +22,11 @@ public class Graph1991 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        List<Node> list = new ArrayList<>();
 
+        list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            list.add(new Node((char) ('A' + i)));
+            list.add(new Node((char)('A' + i)));
         }
-
-        Node root = null;
 
         for (int i = 0; i < N; i++) {
             char a = scanner.next().charAt(0);
@@ -35,29 +35,31 @@ public class Graph1991 {
 
             Node node = list.get(a - 'A');
 
-            if (i == 0) root = node;
-
             if (b != '.') {
                 node.lt = list.get(b - 'A');
             }
+
             if (c != '.') {
                 node.rt = list.get(c - 'A');
             }
+
         }
 
-        preOrder(root);
+
+
+        preOrder(list.get(0));
         System.out.println();
-        inOrder(root);
+        inOrder(list.get(0));
         System.out.println();
-        postOrder(root);
+        postOrder(list.get(0));
 
     }
 
-    private static void postOrder(Node root) {
+    private static void preOrder(Node root) {
         if (root == null) return;
-        postOrder(root.lt);
-        postOrder(root.rt);
         System.out.print(root.data);
+        preOrder(root.lt);
+        preOrder(root.rt);
     }
 
     private static void inOrder(Node root) {
@@ -67,10 +69,10 @@ public class Graph1991 {
         inOrder(root.rt);
     }
 
-    private static void preOrder(Node root) {
+    private static void postOrder(Node root) {
         if (root == null) return;
+        postOrder(root.lt);
+        postOrder(root.rt);
         System.out.print(root.data);
-        preOrder(root.lt);
-        preOrder(root.rt);
     }
 }
