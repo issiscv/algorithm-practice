@@ -5,30 +5,29 @@ import java.util.Scanner;
 public class DivideConquer11729 {
 
     public static StringBuilder sb = new StringBuilder();
+    static int cnt;
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        int N = in.nextInt();
-        sb.append((int) (Math.pow(2, N) - 1)).append('\n');
+        int N = scanner.nextInt();
 
-        Hanoi(N, 1, 2, 3);
-        System.out.println(sb);
+        hanoi(N, 1, 2, 3);
 
+        System.out.println(cnt);
+        System.out.println(sb.toString());
     }
 
-    public static void Hanoi(int N, int start, int mid, int to) {
-        if (N == 1) {
-            sb.append(start + " " + to + "\n");
+    private static void hanoi(int n, int start, int mid, int end) {
+        cnt++;
+        if (n == 1) {
+            sb.append(start + " " + end).append("\n");
             return;
         }
 
-        Hanoi(N - 1, start, to, mid);
-
-        sb.append(start + " " + to + "\n");
-
-        Hanoi(N - 1, mid, start, to);
-
+        hanoi(n-1, start, end, mid);
+        sb.append(start + " " + end).append("\n");
+        hanoi(n-1, mid, start, end);
     }
 }
 

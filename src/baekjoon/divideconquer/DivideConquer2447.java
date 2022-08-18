@@ -4,25 +4,29 @@ import java.util.Scanner;
 
 public class DivideConquer2447 {
 
-    private static char[][] arr;
+    private static char[][] map;
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        arr = new char[N][N];
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                arr[i][j] = ' ';
+        map = new char[N+1][N+1];
+
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
+                map[i][j] = ' ';
             }
         }
 
-        divide(0, 0, N);
+        divide(1, 1, N);
+
+
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                sb.append(arr[i][j]);
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
+                sb.append(map[i][j]);
             }
             sb.append("\n");
         }
@@ -31,19 +35,11 @@ public class DivideConquer2447 {
     }
 
     private static void divide(int row, int col, int n) {
+
         if (n == 3) {
-
-            for (int i = col; i < col + 3; i++) {
-                arr[row][i] = '*';
-            }
-
-            arr[row+1][col] = '*';
-            arr[row+1][col+2] = '*';
-
-            for (int i = col; i < col + 3; i++) {
-                arr[row+2][i] = '*';
-            }
-
+            map[row][col] = map[row][col+1] = map[row][col+2] = '*';
+            map[row+1][col] = map[row+1][col+2] = '*';
+            map[row+2][col] = map[row+2][col+1] = map[row+2][col+2] = '*';
             return;
         }
 
@@ -51,14 +47,11 @@ public class DivideConquer2447 {
 
         divide(row, col, size);
         divide(row, col + size, size);
-        divide(row, col + size * 2, size);
-
+        divide(row, col + size + size, size);
         divide(row + size, col, size);
-        divide(row + size, col + size * 2, size);
-
-        divide(row + size * 2, col, size);
-        divide(row + size * 2, col + size, size);
-        divide(row + size * 2, col + size * 2, size);
+        divide(row + size, col + size + size, size);
+        divide(row + size + size, col, size);
+        divide(row + size + size, col + size, size);
+        divide(row + size + size, col + size + size, size);
     }
-
 }

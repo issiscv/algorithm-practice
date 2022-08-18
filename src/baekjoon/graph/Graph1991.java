@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 public class Graph1991 {
 
-    private static List<Node> list;
+    static List<Node> list = new ArrayList<>();
 
     private static class Node {
-        char data;
+        char c;
         Node lt;
         Node rt;
 
-        public Node(char data) {
-            this.data = data;
+        public Node(char c) {
+            this.c = c;
         }
     }
 
@@ -23,9 +23,8 @@ public class Graph1991 {
 
         int N = scanner.nextInt();
 
-        list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            list.add(new Node((char)('A' + i)));
+            list.add(new Node((char)('A'+i)));
         }
 
         for (int i = 0; i < N; i++) {
@@ -42,37 +41,33 @@ public class Graph1991 {
             if (c != '.') {
                 node.rt = list.get(c - 'A');
             }
-
         }
-
-
 
         preOrder(list.get(0));
         System.out.println();
         inOrder(list.get(0));
         System.out.println();
         postOrder(list.get(0));
-
     }
 
-    private static void preOrder(Node root) {
-        if (root == null) return;
-        System.out.print(root.data);
-        preOrder(root.lt);
-        preOrder(root.rt);
+    private static void preOrder(Node node) {
+        if (node == null) return;
+        System.out.print(node.c);
+        preOrder(node.lt);
+        preOrder(node.rt);
     }
 
-    private static void inOrder(Node root) {
-        if (root == null) return;
-        inOrder(root.lt);
-        System.out.print(root.data);
-        inOrder(root.rt);
+    private static void inOrder(Node node) {
+        if (node == null) return;
+        inOrder(node.lt);
+        System.out.print(node.c);
+        inOrder(node.rt);
     }
 
-    private static void postOrder(Node root) {
-        if (root == null) return;
-        postOrder(root.lt);
-        postOrder(root.rt);
-        System.out.print(root.data);
+    private static void postOrder(Node node) {
+        if (node == null) return;
+        postOrder(node.lt);
+        postOrder(node.rt);
+        System.out.print(node.c);
     }
 }

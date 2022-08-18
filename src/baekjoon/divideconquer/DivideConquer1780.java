@@ -1,51 +1,49 @@
 package baekjoon.divideconquer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class DivideConquer1780 {
 
     private static int[][] arr;
-    private static int A;
-    private static int B;
-    private static int C;
+    private static int a = 0;
+    private static int b = 0;
+    private static int c = 0;
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        arr = new int[N][N];
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        arr = new int[N+1][N+1];
+
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
                 arr[i][j] = scanner.nextInt();
             }
         }
 
-        divide(0, 0, N);
+        divide(1, 1, N);
 
-        System.out.println(A);
-        System.out.println(B);
-        System.out.println(C);
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
     }
 
     private static void divide(int row, int col, int n) {
 
         if (check(row, col, n)) {
             if (arr[row][col] == -1) {
-                A++;
+                a++;
             } else if (arr[row][col] == 0) {
-                B++;
+                b++;
             } else {
-                C++;
+                c++;
             }
         } else {
             int size = n / 3;
 
-            for (int i = row; i < row +  n; i += size) {
+            for (int i = row; i < row + n; i += size) {
                 for (int j = col; j < col + n; j += size) {
                     divide(i, j, size);
                 }
@@ -58,11 +56,12 @@ public class DivideConquer1780 {
 
         for (int i = row; i < row + n; i++) {
             for (int j = col; j < col + n; j++) {
-                if (tmp != arr[i][j]) {
+                if (arr[i][j] != tmp) {
                     return false;
                 }
             }
         }
+
         return true;
     }
 }

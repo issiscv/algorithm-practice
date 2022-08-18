@@ -6,19 +6,20 @@ import java.util.Scanner;
 
 public class Graph1967 {
 
+
     private static class Node {
-        int vertex;
+        int number;
         int weight;
 
-        public Node(int vertex, int weight) {
-            this.vertex = vertex;
+        public Node(int number, int weight) {
+            this.number = number;
             this.weight = weight;
         }
     }
 
     static List<List<Node>> list = new ArrayList<>();
     static boolean[] visited;
-    static int max;
+    static int max = Integer.MIN_VALUE;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -26,25 +27,22 @@ public class Graph1967 {
         int N = scanner.nextInt();
 
         visited = new boolean[N+1];
+
         for (int i = 0; i <= N; i++) {
             list.add(new ArrayList<>());
         }
 
         for (int i = 0; i < N-1; i++) {
-            int pNode = scanner.nextInt();
-            int cNode = scanner.nextInt();
+            int pNumber = scanner.nextInt();
+            int cNumber = scanner.nextInt();
             int weight = scanner.nextInt();
 
-            list.get(pNode).add(new Node(cNode, weight));
-            list.get(cNode).add(new Node(pNode, weight));
+            list.get(pNumber).add(new Node(cNumber, weight));
+            list.get(cNumber).add(new Node(pNumber, weight));
         }
 
-        max = Integer.MIN_VALUE;
-        visited = new boolean[N + 1];
         DFS(1, 0);
-
         visited = new boolean[N+1];
-
         DFS(node, 0);
 
         System.out.println(max);
@@ -56,17 +54,18 @@ public class Graph1967 {
         visited[v] = true;
 
         if (sum > max) {
+            max = sum;
             node = v;
         }
 
-        max = Math.max(max, sum);
-
         for (Node node : list.get(v)) {
-            int vertex = node.vertex;
+            int number = node.number;
             int weight = node.weight;
-            if (!visited[vertex]) {
-                DFS(vertex, sum + weight);
+
+            if (!visited[number]) {
+                DFS(number, sum + weight);
             }
+
         }
     }
 }

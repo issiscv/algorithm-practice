@@ -5,57 +5,64 @@ import java.util.*;
 public class MissRate {
 
     public static int[] solution(int N, int[] stages) {
+
+        int userCount = stages.length;
         int[] stageCount = new int[N+1];
 
         for (int i = 0; i < stages.length; i++) {
-            if (stages[i] <= N) stageCount[stages[i]]++;
+            if (stages[i] <= N) {
+                stageCount[stages[i]]++;
+            }
         }
 
         Map<Integer, Double> map = new HashMap<>();
-        int userCount = stages.length;
 
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i < stageCount.length; i++) {
+
             if (userCount == 0) {
-                map.put(i, (double) 0);
+                map.put(i, 0D);
                 continue;
             }
 
-            double value = stageCount[i] / (double) userCount;
-            map.put(i, value);
+            map.put(i, stageCount[i]/(double) userCount);
             userCount -= stageCount[i];
         }
 
-        int[] answer = new int[N];
+        int[] arr = new int[N];
 
         for (int i = 0; i < N; i++) {
-            int idx = -1;
+
             double max = -1;
+            int idx = -1;
 
-            for (Integer key : map.keySet()) {
-                if (map.get(key) > max) {
-                    max = map.get(key);
-                    idx = key;
+            for (int tmp : map.keySet()) {
+                double rate = map.get(tmp);
+                if (rate > max) {
+                    max = rate;
+                    idx = tmp;
                 }
             }
 
-            for (Integer key : map.keySet()) {
-                if (map.get(key) >= max) {
-                    if (key < idx) {
-                        idx = key;
-                    }
+            for (int tmp : map.keySet()) {
+                double rate = map.get(tmp);
+                if (rate == max && tmp < idx) {
+                    idx = tmp;
                 }
             }
-
-            answer[i] = idx;
+            arr[i] = idx;
             map.remove(idx);
         }
 
-        return answer;
+
+        for (int i : arr) {
+            System.out.println(i);
+        }
+        return arr;
     }
 
     public static void main(String[] args) {
         int n = 4;
-        int[] stages = {4,4,4,4,4};
+        int[] stages = {1, 1, 1, 1, 1};
         solution(n, stages);
     }
 

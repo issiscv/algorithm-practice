@@ -9,37 +9,52 @@ public class DivideConquer11728 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
 
-        int[] na = new int[n];
-        int[] ma = new int[m];
+        int[] one = new int[N];
+        int[] two = new int[M];
 
-        for (int i = 0; i < n; i++) {
-            na[i] = scanner.nextInt();
+        for (int i = 0; i < N; i++) {
+            one[i] = scanner.nextInt();
         }
 
-        for (int i = 0; i < m; i++) {
-            ma[i] = scanner.nextInt();
+        for (int i = 0; i < M; i++) {
+            two[i] = scanner.nextInt();
         }
 
         int lt = 0;
         int rt = 0;
+        int tmp = 0;
 
-        List<Integer> list = new ArrayList<>();
+        int[] arr = new int[N+M];
 
-        while (lt < n && rt < m) {
-            if (na[lt] < ma[rt]) list.add(na[lt++]);
-            else list.add(ma[rt++]);
+        while (lt < N && rt < M) {
+            if (one[lt] > two[rt]) {
+                arr[tmp++] = two[rt++];
+            } else {
+                arr[tmp++] = one[lt++];
+            }
         }
 
-        while (lt < n) list.add(na[lt++]);
-        while (rt < m) list.add(ma[rt++]);
+        if (lt >= N) {
+            while (rt < M) {
+                arr[tmp++] = two[rt++];
+            }
+        }
+
+        if (rt >= M) {
+            while (lt < N) {
+                arr[tmp++] = one[lt++];
+            }
+        }
 
         StringBuilder sb = new StringBuilder();
-        for (Integer i : list) {
+        for (int i : arr) {
             sb.append(i).append(" ");
         }
+
         System.out.println(sb.toString());
+
     }
 }

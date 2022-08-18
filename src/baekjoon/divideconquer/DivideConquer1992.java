@@ -4,58 +4,60 @@ import java.util.Scanner;
 
 public class DivideConquer1992 {
 
-    private static int[][] arr;
-    private static StringBuilder sb = new StringBuilder();
-    public static void main(String[] args) {
+    private static int[][] map;
+    private static StringBuilder sb;
 
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
 
-        arr = new int[N][N];
-        for (int i = 0; i < N; i++) {
+        map = new int[N+1][N+1];
+
+        for (int i = 1; i <= N; i++) {
             String str = scanner.next();
-            for (int j = 0; j < N; j++) {
-                arr[i][j] = str.charAt(j) - '0';
+            for (int j = 1; j <= N; j++) {
+                map[i][j] = Integer.parseInt(String.valueOf(str.charAt(j-1)));
             }
         }
 
-        divide(0, 0, N);
+        sb = new StringBuilder();
+
+        divide(1, 1, N);
+
         System.out.println(sb.toString());
     }
 
     private static void divide(int row, int col, int n) {
+
         if (check(row, col, n)) {
-            sb.append(arr[row][col]);
-            return;
-        }
+            sb.append(map[row][col]);
+        } else {
 
-        if (n == 1) {
-            return;
-        }
+            int size = n / 2;
+            sb.append("(");
 
-        int size = n / 2;
-        sb.append("(");
-
-        for (int i = row; i < row + n; i += size) {
-            for (int j = col; j < col + n; j += size) {
-                divide(i, j, size);
+            for (int i = row; i < row + n; i += size) {
+                for (int j = col; j < col + n; j += size) {
+                    divide(i, j, size);
+                }
             }
+            sb.append(")");
         }
 
-        sb.append(")");
     }
 
     private static boolean check(int row, int col, int n) {
-        int tmp = arr[row][col];
+        int tmp = map[row][col];
 
         for (int i = row; i < row + n; i++) {
             for (int j = col; j < col + n; j++) {
-                if (arr[i][j] != tmp) {
+                if (map[i][j] != tmp) {
                     return false;
                 }
             }
         }
+
         return true;
     }
 }
