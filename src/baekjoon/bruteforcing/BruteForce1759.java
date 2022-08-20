@@ -1,57 +1,64 @@
 package baekjoon.bruteforcing;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class BruteForce1759 {
 
+    private static int N;
+    private static int M;
     private static char[] arr;
-    private static boolean[] visited;
-    private static int l;
-    private static int c;
+    private static char[] password;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        l = scanner.nextInt();
-        c = scanner.nextInt();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
-        arr = new char[c];
-        visited = new boolean[c];
+        password = new char[N];
 
-        for (int i = 0; i < c; i++) {
-            arr[i] = scanner.next().charAt(0);
+        arr = new char[M];
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < M; i++) {
+            arr[i] = st.nextToken().charAt(0);
         }
 
         Arrays.sort(arr);
 
-        DFS(0, 0);
-
+        combi(0, 1);
     }
 
-    private static void DFS(int v, int count) {
-        if (count == l) {
-            int a = 0;
-            int b = 0;
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < c; i++) {
-                if (visited[i]) {
-                    sb.append(arr[i]);
-                }
-                if (arr[i] == 'a' || arr[i] == 'e' || arr[i] == 'i' || arr[i] == 'o' || arr[i] == 'u') {
-                    a++;
+    private static void combi(int v, int s) {
+
+        if (v == N) {
+
+            int moeum = 0;
+            int zaeum = 0;
+            for (char c : password) {
+                if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c =='u') {
+                    moeum++;
                 } else {
-                    b++;
+                    zaeum++;
                 }
-            }
-            if (a >= 1 && b >= 2) {
-                System.out.println(sb.toString());
             }
 
+            if (moeum >= 1 && zaeum >= 2) {
+                for (char c : password) {
+                    System.out.print(c);
+                }
+                System.out.println();
+            }
+
+            return;
         } else {
-            for (int i = v; i < c; i++) {
-                visited[i] = true;
-                DFS(i+1, count+1);
-                visited[i] = false;
+            for (int i = s; i <= M; i++) {
+                password[v] = arr[i-1];
+                combi(v+1, i+1);
             }
         }
     }

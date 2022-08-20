@@ -7,25 +7,27 @@ import java.util.*;
 
 public class BruteForce2583 {
 
-    private static int[] dx = {-1 ,0, 1, 0};
-    private static int[] dy = {0, 1, 0, -1};
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
+    private static int[][] arr;
     private static int n;
     private static int m;
-    private static int[][] arr;
-
-    private static int max = 0;
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         StringTokenizer st = new StringTokenizer(br.readLine());
+
 
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
 
         arr = new int[n][m];
-
+        
+        //5행 7열
+        
         for (int i = 0; i < K; i++) {
             st = new StringTokenizer(br.readLine());
 
@@ -44,38 +46,43 @@ public class BruteForce2583 {
 
         List<Integer> list = new ArrayList<>();
 
+        int cnt = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (arr[i][j] == 0) {
+                    max = 0;
                     DFS(i, j);
                     list.add(max);
-                    max = 0;
+                    cnt++;
                 }
             }
         }
 
         Collections.sort(list);
+        System.out.println(cnt);
 
-        StringBuilder sb = new StringBuilder();
-        for (Integer i : list) {
-            sb.append(i).append(" ");
+        for (Integer tmp : list) {
+            System.out.print(tmp + " ");
         }
 
-        System.out.println(list.size());
-        System.out.println(sb);
     }
 
+    static int max;
+
     private static void DFS(int i, int j) {
+
+        arr[i][j] = 2;
         max++;
-        arr[i][j] = 1;
 
         for (int k = 0; k < 4; k++) {
             int nx = i + dx[k];
             int ny = j + dy[k];
 
-            if (nx >= 0 && nx < n && ny >= 0 && ny < m && arr[nx][ny] == 0) {
+            if (nx >= 0 && nx< n && ny >= 0 && ny < m && arr[nx][ny] == 0) {
                 DFS(nx, ny);
             }
+
         }
+
     }
 }
