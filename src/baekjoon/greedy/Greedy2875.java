@@ -17,10 +17,10 @@ public class Greedy2875 {
         int k = Integer.parseInt(st.nextToken());
 
         int count = 0;
-        while (n >= 2 && m >= 1 && n + m - k >= 3) {
+
+        while (n >= 0 && m >= 0  && n + m - k > 3) {
             n -= 2;
             m -= 1;
-
             count++;
         }
         System.out.println(count);

@@ -16,21 +16,19 @@ public class Greedy11399 {
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
+
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
+        int sum = 0;
+        int answer = 0;
         Arrays.sort(arr);
 
-        int sum = 0;
-        int result = 0;
-        //1 2 3 3 4
-        for (int i = 0; i < N; i++) {
-            sum += arr[i];//1 3 6 9 13
-            result += sum;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            answer += sum;
         }
-
-        System.out.println(result);
-
+        System.out.println(answer);
     }
 }

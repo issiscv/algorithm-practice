@@ -12,7 +12,6 @@ public class DivideConquer1517 {
         Scanner scanner = new Scanner(System.in);
 
         n = scanner.nextInt();
-
         arr = new int[n];
         sorted = new int[n];
 
@@ -20,11 +19,10 @@ public class DivideConquer1517 {
             arr[i] = scanner.nextInt();
         }
 
-        int lt = 0;//0
-        int rt = n-1;//2
+        mergeSort(0, n-1);
 
-        mergeSort(lt, rt);
         System.out.println(cnt);
+
     }
 
     private static void mergeSort(int lt, int rt) {
@@ -32,10 +30,9 @@ public class DivideConquer1517 {
         if (lt < rt) {
             int mid = (lt + rt) / 2;
             mergeSort(lt, mid);
-            mergeSort(mid+1, rt);
+            mergeSort(mid + 1, rt);
             merge(lt, mid, rt);
         }
-
     }
 
     private static long cnt = 0;

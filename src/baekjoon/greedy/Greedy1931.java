@@ -8,31 +8,34 @@ import java.util.*;
 public class Greedy1931 {
 
     private static class Conference implements Comparable<Conference> {
-        int s;
-        int e;
+        int start;
+        int end;
 
-        public Conference(int s, int e) {
-            this.s = s;
-            this.e = e;
+        public Conference(int start, int end) {
+            this.start = start;
+            this.end = end;
         }
 
         @Override
         public int compareTo(Conference o) {
-            if (this.e == o.e) {
-                return this.s - o.s;
+            if (this.end == o.end) {
+                return this.start - o.start;
             }
-            return this.e - o.e;
+            return this.end - o.end;
         }
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
+        StringTokenizer st;
+
         List<Conference> list = new ArrayList<>();
+
         for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
 
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
@@ -42,14 +45,19 @@ public class Greedy1931 {
 
         Collections.sort(list);
 
-        int tmp = list.get(0).e;
-        int result = 0;
-        for (int i = 1; i < N; i++) {
-            if (list.get(i).s >= tmp) {
-                tmp = list.get(i).e;
-                result++;
+        int tmp = 0;
+        int cnt = 0;
+
+        for (Conference conference : list) {
+            int start = conference.start;
+            int end = conference.end;
+
+            if (start >= tmp) {
+                tmp = end;
+                cnt++;
             }
         }
-        System.out.println(result+1);
+
+        System.out.println(cnt);
     }
 }

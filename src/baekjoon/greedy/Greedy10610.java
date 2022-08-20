@@ -16,22 +16,30 @@ public class Greedy10610 {
         String N = br.readLine();
 
         List<Integer> list = new ArrayList<>();
+
         for (int i = 0; i < N.length(); i++) {
             list.add(N.charAt(i) - '0');
         }
 
         Collections.sort(list);
 
-        int sum = 0;
-        for (int i = 0; i < N.length(); i++) {
-            sum += list.get(i);
-        }
-
-        if (list.get(0) == 0 && sum % 3 == 0) {
-            for (int i = N.length() - 1; i >= 0; i--) {
-                System.out.print(list.get(i));
-            }
-        } else
+        if (list.get(0) != 0) {
             System.out.println(-1);
+        } else {
+            int sum = 0;
+
+            for (int i = 0; i < N.length(); i++) {
+                sum += list.get(i);
+            }
+
+            if (sum % 3 == 0) {
+                for (int i = N.length() - 1; i >= 0; i--) {
+                    System.out.print(list.get(i));
+                }
+            } else {
+                System.out.println(-1);
+            }
+
+        }
     }
 }
