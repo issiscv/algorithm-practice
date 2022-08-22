@@ -21,48 +21,57 @@ public class BruteForce9019 {
     }
 
     private static void BFS(int a, int b) {
-
+        
         Queue<Integer> queue = new LinkedList<>();
-        queue.offer(a);
 
-        boolean[] visited = new boolean[10000];
         String[] command = new String[10000];
+        boolean[] visited = new boolean[10000];
 
+        visited[a] = true;
         Arrays.fill(command, "");
 
-        while (!queue.isEmpty() && !visited[b]) {
+        queue.offer(a);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
 
-            int tmp = queue.poll();
+            for (int i = 0; i < size; i++) {
+                int tmp = queue.poll();
 
-            int D = (tmp * 2) % 10000;
-            int S = tmp == 0 ? 9999 : tmp - 1;
-            int L = (tmp % 1000) * 10 + tmp / 1000;
-            int R = (tmp % 10) * 1000 + tmp / 10;
+                if (tmp == b) {
+                    System.out.println(command[tmp]);
+                    return;
+                }
 
-            if (!visited[D]) {
-                visited[D] = true;
-                command[D] = command[tmp] + "D";
-                queue.offer(D);
-            }
+                int D = (tmp * 2) % 10000;
+                int S = tmp == 0 ? 9999 : tmp - 1;
+                int L = tmp % 1000 * 10 + tmp / 1000;
+                int R = tmp % 10 * 1000 + tmp / 10;
 
-            if (!visited[S]) {
-                visited[S] = true;
-                command[S] = command[tmp] + "S";
-                queue.offer(S);
-            }
+                if (!visited[D]) {
+                    queue.offer(D);
+                    visited[D] = true;
+                    command[D] = command[tmp] + "D";
+                }
 
-            if (!visited[L]) {
-                visited[L] = true;
-                command[L] = command[tmp] + "L";
-                queue.offer(L);
-            }
+                if (!visited[S]) {
+                    queue.offer(S);
+                    visited[S] = true;
+                    command[S] = command[tmp] + "S";
+                }
 
-            if (!visited[R]) {
-                visited[R] = true;
-                command[R] = command[tmp] + "R";
-                queue.offer(R);
+                if (!visited[L]) {
+                    queue.offer(L);
+                    visited[L] = true;
+                    command[L] = command[tmp] + "L";
+                }
+
+                if (!visited[R]) {
+                    queue.offer(R);
+                    visited[R] = true;
+                    command[R] = command[tmp] + "R";
+                }
             }
         }
-        System.out.println(command[b]);
     }
+
 }

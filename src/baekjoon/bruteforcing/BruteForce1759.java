@@ -1,65 +1,61 @@
 package baekjoon.bruteforcing;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 public class BruteForce1759 {
 
-    private static int N;
-    private static int M;
+    private static int n;
+    private static int m;
     private static char[] arr;
     private static char[] password;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        n = scanner.nextInt();
+        m = scanner.nextInt();
 
-        password = new char[N];
+        arr = new char[m];
+        password = new char[n];
 
-        arr = new char[M];
-
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < M; i++) {
-            arr[i] = st.nextToken().charAt(0);
+        for (int i = 0; i < m; i++) {
+            arr[i] = scanner.next().charAt(0);
         }
 
         Arrays.sort(arr);
 
         combi(0, 1);
+
     }
 
     private static void combi(int v, int s) {
 
-        if (v == N) {
+        if (v == n) {
 
             int moeum = 0;
             int zaeum = 0;
-            for (char c : password) {
-                if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c =='u') {
+
+            for (int i = 0; i < n; i++) {
+                int p = password[i];
+                if (p == 'a' || p == 'e' || p == 'i' || p == 'o' || p == 'u')
                     moeum++;
-                } else {
+                else
                     zaeum++;
-                }
             }
 
             if (moeum >= 1 && zaeum >= 2) {
-                for (char c : password) {
-                    System.out.print(c);
+                for (char i : password) {
+                    System.out.print(i);
                 }
                 System.out.println();
             }
 
-            return;
         } else {
-            for (int i = s; i <= M; i++) {
+            for (int i = s; i <= m; i++) {
                 password[v] = arr[i-1];
                 combi(v+1, i+1);
             }
         }
+
     }
 }
