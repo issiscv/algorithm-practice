@@ -21,6 +21,7 @@ public class Lv2기능_개발 {
                 needDay[i] = lessProgress[i] / speeds[i] + 1;
             }
         }
+
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> list = new ArrayList<>();
 
@@ -34,7 +35,6 @@ public class Lv2기능_개발 {
         list.add(queue.size());
 
         answer = new int[list.size()];
-
         for (int i = 0; i < list.size(); i++) {
             answer[i] = list.get(i);
         }
