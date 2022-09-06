@@ -5,95 +5,82 @@ import java.util.Stack;
 public class Lv2괄호_변환 {
 
     public static String solution(String p) {
-
-        if (isRightBracket(p)) {
-            return p;
-        } else {
-            return recursive(p);
-        }
+        return recursive(p);
     }
 
     private static String recursive(String p) {
-        if (p.equals("")) {
-            return "";
+
+        if (p.length() == 0) return "";
+
+        int balancedIndex = findBalancedIndex(p);
+
+        String u = p.substring(0, balancedIndex);
+        String v = p.substring(balancedIndex, p.length());
+
+        if (isRightBracket(u)) {
+            return u + recursive(v);
         } else {
-            int idx = makeBalanceBracket(p);
-            String u = p.substring(0, idx);
-            String v = p.substring(idx, p.length());
+            String tmp = "(";
+            tmp += recursive(v);
+            tmp += ")";
 
-            if (isRightBracket(u)) {
-                return u + recursive(v);
-            } else {
-                String tmp = "(";
-                tmp += recursive(v);
-                tmp += ")";
-
-                u = u.substring(1, u.length() - 1);
-                u = flip(u);
-
-                return tmp + u;
-            }
+            u = u.substring(1, u.length()-1);
+            u = flip(u);
+            return tmp + u;
         }
+
     }
 
     private static String flip(String u) {
 
-        String str = "";
+        String answer = "";
 
-        for (int i = 0; i < u.length(); i++) {
-            if (u.charAt(i) == '(') {
-                str += ')';
+        for (char c : u.toCharArray()) {
+            if (c == '(') {
+                answer += ")";
             } else {
-                str += '(';
+                answer += "(";
             }
         }
-        return str;
+        return answer;
     }
 
+    private static boolean isRightBracket(String u) {
+        Stack<Character> stack = new Stack<>();
 
-    private static int makeBalanceBracket(String p) {
+        for (char c : u.toCharArray()) {
+            if (stack.isEmpty()) {
+                stack.push(c);
+            } else {
+                if (c == ')') {
+                    stack.pop();
+                } else {
+                    stack.push('(');
+                }
+            }
+        }
 
-        //올바른 괄호 문자열인지 확인
+        return stack.isEmpty();
+    }
+
+    private static int findBalancedIndex(String p) {
         int count = 0;
         int idx = 0;
 
         for (int i = 0; i < p.length(); i++) {
-            if (p.charAt(i) == '(') {
-                count++;
-            } else {
-                count--;
-            }
+            if (p.charAt(i) == '(') count++;
+            else count--;
 
             if (count == 0) {
                 break;
             }
             idx++;
         }
-        return idx + 1;
+        return idx+1;
     }
-
-    private static boolean isRightBracket(String p) {
-        Stack<Character> stack = new Stack<>();
-
-        for (char c : p.toCharArray()) {
-            if (stack.isEmpty()) {
-                stack.push(c);
-            } else {
-                if (c == '(') {
-                    stack.push('(');
-                } else {
-                    stack.pop();
-                }
-            }
-
-        }
-
-        return stack.isEmpty();
-    }
-
 
     public static void main(String[] args) {
-        String solution = solution(")(");
+        String solution = solution("()))((()");
         System.out.println(solution);
     }
 
