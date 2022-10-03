@@ -6,13 +6,12 @@ public class Lv2예상_대진표 {
         int answer = 0;
 
         while (true) {
-            a = a / 2 + a % 2;
-            b = b / 2 + b % 2;
+            a = (a + 1) / 2;
+            b = (b + 1) / 2;
             answer++;
-            if (a == b)
-                break;
-
+            if (a==b) break;
         }
+        System.out.println(answer);
 
         return answer;
     }

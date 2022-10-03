@@ -8,16 +8,23 @@ public class Lv2H_Index {
     public static int solution(int[] citations) {
         int answer = 0;
 
-        int n = citations.length;
+        //0 1 3 5 6
         int max = Arrays.stream(citations).max().getAsInt();
 
-        for (int i = 0; i < max; i++) {
-            int count = 0;
-            for (int j = 0; j < n; j++) {
-                if (citations[j] >= i) count++;
+        for (int i = 0; i <= max; i++) {
+            int over = 0;//5
+            int under = 0;//1
+
+            for (int j = 0; j < citations.length; j++) {
+                if (citations[j] >= i) {
+                    over++;
+                }
+                if (citations[j] <= i) {
+                    under++;
+                }
             }
 
-            if (count >= i && n - count <= i) {
+            if (over >=i && under <= i) {
                 answer = Math.max(answer, i);
             }
         }

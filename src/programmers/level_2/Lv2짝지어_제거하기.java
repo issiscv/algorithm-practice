@@ -5,27 +5,24 @@ import java.util.Stack;
 public class Lv2짝지어_제거하기 {
 
     public static int solution(String s) {
+        int answer = -1;
 
         Stack<Character> stack = new Stack<>();
 
-        char[] array = s.toCharArray();
-
-        for (int j = 0; j < array.length; j++) {
+        for (char c : s.toCharArray()) {
             if (stack.isEmpty()) {
-                stack.push(array[j]);
+                stack.push(c);
                 continue;
             }
 
-            if (stack.peek() == array[j]) {
+            if (stack.peek() == c) {
                 stack.pop();
             } else {
-                stack.push(array[j]);
+                stack.push(c);
             }
-
         }
 
-        if (stack.isEmpty()) return 1;
-        else return 0;
+        return stack.isEmpty() ? 1 : 0;
     }
 
     public static void main(String[] args) {

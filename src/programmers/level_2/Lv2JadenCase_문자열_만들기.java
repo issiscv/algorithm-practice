@@ -1,25 +1,26 @@
 package programmers.level_2;
 
-import java.util.Locale;
 
 public class Lv2JadenCase_문자열_만들기 {
 
     public static String solution(String s) {
         String answer = "";
-        boolean first = true;
+        boolean isFirst = true;
 
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+            if (isFirst && !Character.isSpaceChar(s.charAt(i))) {
+                if (Character.isDigit(s.charAt(i))) {
+                    answer += s.charAt(i);
+                } else {
+                    answer += Character.toUpperCase(s.charAt(i));
+                }
 
-            if (first) {
-                answer += Character.toUpperCase(c);
-                first = false;
+                isFirst = false;
+            } else if (Character.isSpaceChar(s.charAt(i))) {
+              isFirst = true;
+              answer += s.charAt(i);
             } else {
-                answer += Character.toLowerCase(c);
-            }
-
-            if (c == ' ') {
-                first = true;
+                answer += Character.toLowerCase(s.charAt(i));
             }
         }
 
@@ -27,7 +28,7 @@ public class Lv2JadenCase_문자열_만들기 {
     }
 
     public static void main(String[] args) {
-        String solution = solution("for the last week");
+        String solution = solution("for  the last week");
         System.out.println(solution);
     }
 

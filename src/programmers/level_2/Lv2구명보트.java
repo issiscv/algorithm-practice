@@ -7,26 +7,27 @@ public class Lv2구명보트 {
     public static int solution(int[] people, int limit) {
         int answer = 0;
 
-        int i = 0;
+        //50 70 80
         Arrays.sort(people);
+        int j = people.length-1;
+        for (int i = 0; i <= j; j--) {
 
-        for (int j = people.length - 1;  i <= j; j--) {
-            int sum = people[j] + people[i];
-
-            if (sum > limit) {
+            if (people[i] + people[j] > limit) {
                 answer++;
             } else {
                 i++;
                 answer++;
             }
         }
-
         System.out.println(answer);
+
         return answer;
     }
 
     public static void main(String[] args) {
-        solution(new int[]{50, 70, 80}, 100); //-> 3
+        int[] people = {50, 70, 80};
+        int limit = 100;
+        solution(people, limit); //-> 3
         //50, 50, 70, 80 -> 3
     }
 

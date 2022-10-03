@@ -11,23 +11,19 @@ public class Lv2괄호_회전하기 {
             String a = s.substring(0, i);
             String b = s.substring(i);
 
-            String tmp = b + a;
-
-            if (isValidBracket(tmp)) {
+            if (isValidBracket(b+a)) {
                 answer++;
             }
-
         }
         System.out.println(answer);
-
         return answer;
     }
 
-    private static boolean isValidBracket(String tmp) {
+    private static boolean isValidBracket(String s) {
 
         Stack<Character> stack = new Stack<>();
 
-        for (char c : tmp.toCharArray()) {
+        for (char c : s.toCharArray()) {
             if (stack.isEmpty()) {
                 stack.push(c);
                 continue;
@@ -36,24 +32,17 @@ public class Lv2괄호_회전하기 {
             if (c == '(' || c == '{' || c == '[') {
                 stack.push(c);
             } else {
-                Character peek = stack.peek();
                 if (c == ')') {
-                    if (peek == '(') {
+                    if (stack.peek() == '(') {
                         stack.pop();
-                    } else {
-                        stack.push(c);
                     }
                 } else if (c == '}') {
-                    if (peek == '{') {
+                    if (stack.peek() == '{') {
                         stack.pop();
-                    } else {
-                        stack.push(c);
                     }
                 } else {
-                    if (peek == '[') {
+                    if (stack.peek() == '[') {
                         stack.pop();
-                    } else {
-                        stack.push(c);
                     }
                 }
             }
@@ -64,7 +53,7 @@ public class Lv2괄호_회전하기 {
     }
 
     public static void main(String[] args) {
-        solution("}}}");
+        solution("[](){}");
     }
 
 }

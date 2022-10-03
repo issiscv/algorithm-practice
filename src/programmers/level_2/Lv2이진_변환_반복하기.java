@@ -6,40 +6,44 @@ public class Lv2이진_변환_반복하기 {
         int[] answer = {};
 
         int count = 0;
-        int idx = 0;
+        int zero = 0;
+        int one = 0;
+
         while (!s.equals("1")) {
-            int one = 0;
-            for (char c : s.toCharArray()) {
-                if (c == '0') count++;
-                else one++;
+
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '0') {
+                    zero++;
+                } else {
+                    one++;
+                }
             }
 
-            s = binary(one);
-            idx++;
+            s = toBinary(one);
+
+            count++;
+            one = 0;
         }
 
         answer = new int[2];
-        answer[0] = idx;
-        answer[1] = count;
-
+        answer[0] = count;
+        answer[1] = zero;
         return answer;
     }
 
-    private static String binary(int num) {
+    private static String toBinary(int num) {
 
         StringBuilder sb = new StringBuilder();
 
-        while (num > 0) {
+        while (num != 0) {
             sb.append(num % 2);
             num = num / 2;
         }
-
         return sb.reverse().toString();
-
     }
 
     public static void main(String[] args) {
-        String str = "1111111";
+        String str = "110010101001";
         solution(str);
     }
 

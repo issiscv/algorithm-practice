@@ -3,30 +3,17 @@ package programmers.level_2;
 public class Lv2행렬의_곱셈 {
 
     public static int[][] solution(int[][] arr1, int[][] arr2) {
-        int[][] answer = {};
+        int[][] answer = new int[arr1.length][arr2[0].length];
+        // (3 2) * (2 2)
+        for (int i = 0; i < arr1.length; i++) {
 
-        int row = arr1.length;//3
-        int col = arr2[0].length;//2
-
-        answer = new int[row][col];
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+            for (int j = 0; j < arr2[0].length; j++) {
                 int sum = 0;
                 for (int k = 0; k < arr2.length; k++) {
-                    int a = arr1[i][k];
-                    int b = arr2[k][j];
-                    sum += (a*b);
+                    sum += arr1[i][k] * arr2[k][j];
                 }
                 answer[i][j] = sum;
             }
-        }
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                System.out.print(answer[i][j]);
-            }
-            System.out.println();
         }
 
         return answer;

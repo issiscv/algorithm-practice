@@ -5,7 +5,8 @@ import java.util.*;
 public class Lv2영어_끝말잇기 {
 
     public static int[] solution(int n, String[] words) {
-        int[] answer = new int[2];
+        int[] answer = {};
+        answer = new int[2];
 
         List<List<String>> list = new ArrayList<>();
 
@@ -14,48 +15,42 @@ public class Lv2영어_끝말잇기 {
         }
 
         for (int i = 0; i < words.length; i++) {
-            int idx = i % n;//0 1 2
-            list.get(idx).add(words[i]);
+            list.get(i % n).add(words[i]);
         }
 
-        String lastWord = "";
         Set<String> set = new HashSet<>();
+        String lastWord = "";
 
-        int len = words.length;
+        for (int i = 0; i < words.length; i++) {
+            int a = i % n;//0 1 2 0 1 2
+            int b = i / n;//0 0 0 1 1 1
 
-        for (int i = 0; i < len; i++) {
-            int a = i / n;
-            int b = i % n;
-
-            String s = list.get(b).get(a);
+            String str = list.get(a).get(b);
 
             if (i == 0) {
-                lastWord = s;
-                set.add(s);
+                set.add(str);
+                lastWord = str;
                 continue;
             }
 
+            char now = str.charAt(0);
+            char last = lastWord.charAt(lastWord.length()-1);
 
-            char now = s.charAt(0);
-            char last = lastWord.charAt(lastWord.length() - 1);
-
-
-            if (!set.contains(s) && now == last) {
-                lastWord = s;
-                set.add(s);
+            if (now == last && !set.contains(str)) {
+                set.add(str);
+                lastWord = str;
             } else {
-                answer[0] = b+1;
-                answer[1] = a+1;
+                answer[0] = a+1;
+                answer[1] = b+1;
                 break;
             }
-
         }
 
         return answer;
     }
 
     public static void main(String[] args) {
-        int[] solution = solution(2, new String[]{"hello", "one", "even", "never", "now", "world", "draw"});
+        int[] solution = solution(3, new String[]{"tank", "kick", "know", "wheel", "land", "dream", "mother", "robot", "tank"});
         for (int si : solution) {
             System.out.println(si);
         }
